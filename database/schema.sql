@@ -1,4 +1,3 @@
--- Run these commands in PostgreSQL Query Tool
 
 -- 1. Create database
 CREATE DATABASE loginapp;
@@ -29,3 +28,46 @@ CREATE TABLE refresh_tokens (
     user_id INT,
     token TEXT
 );
+
+-- 6. Create departments table
+CREATE TABLE departments (
+	id SERIAL PRIMARY KEY,
+	department_name VARCHAR(100)
+);
+
+INSERT INTO departments(department_name) VALUES ('IT'),('HR'),('Finance'),('Marketing');
+
+-- 7. Create employee_profiles table
+CREATE TABLE employee_profiles (
+	id SERIAL PRIMARY KEY,
+	user_id INT REFERENCES users(id),
+	department_id INT REFERENCES departments(id),
+	phone VARCHAR(20),
+	address TEXT,
+	designation VARCHAR(100),
+	salary NUMERIC(10,2),
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 8. Employee Images
+CREATE TABLE employee_images (
+	id SERIAL PRIMARY KEY,
+	employee_id INT REFERENCES employee_profiles(id),
+	image_url TEXT
+);
+
+-- 9. Create skills table
+CREATE TABLE skills(
+	id SERIAL PRIMARY KEY,
+	skill_name VARCHAR(100)
+);
+
+INSERT INTO skills(skill_name) VALUES ('React'),('NodeJS'),('PostgreSQL'),('Python'),('Java');
+
+-- 10. Create employee_skils (many-to-many)
+CREATE TABLE employee_skills (
+	id SERIAL PRIMARY KEY,
+	employee_id INT REFERENCES employee_profiles(id),
+	skill_id INT REFERENCES skills(id)
+);
+
