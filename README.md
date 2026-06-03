@@ -44,20 +44,16 @@ LoginApp/
 │       └── package.json
 │
 └── database/
-    ├── schema.sql                   # Users, refresh_tokens, password_reset
-    └── schema_task3.sql             # Departments, employees, images, skills
+    ├── schema.sql                   # Users, refresh_tokens, password_reset, Departments, employees, images, skills
+
 ```
 
 ## Setup
 
 ### 1. Database
-Open PostgreSQL and run both schema files in order:
+Open PostgreSQL and run schema file:
 ```sql
--- First
 \i database/schema.sql
-
--- Then
-\i database/schema_task3.sql
 ```
 
 ### 2. Backend
