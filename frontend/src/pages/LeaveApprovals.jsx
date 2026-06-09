@@ -8,6 +8,8 @@ import Button from "../components/Button";
 import StatusBadge from "../components/StatusBadge";
 import Modal from "../components/Modal";
 import Loader from "../components/Loader";
+const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 
 function LeaveApprovals() {
   const { token } = useAuth();
@@ -18,7 +20,7 @@ function LeaveApprovals() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/leave/pending", {
+      .get(`${API}/api/leave/pending`, {
         headers: { Authorization: token },
       })
       .then((r) => setLeaves(r.data))
@@ -29,7 +31,7 @@ function LeaveApprovals() {
   const handleAction = async (action) => {
     try {
       await axios.post(
-        `http://localhost:5000/api/leave/${selected.id}/${action}`,
+        `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/leave/${selected.id}/${action}`,
         { remarks },
         { headers: { Authorization: token } }
       );

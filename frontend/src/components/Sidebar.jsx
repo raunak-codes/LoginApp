@@ -3,13 +3,38 @@ import { useAuth } from "../context/AuthContext";
 import "./Sidebar.css";
 
 const navItems = [
-  { label: "Dashboard",    path: "/dashboard",           roles: ["admin","hr","manager","user"] },
-  { label: "Employees",    path: "/employees",           roles: ["admin","hr","manager"] },
-  { label: "Departments",  path: "/departments",         roles: ["admin","hr"] },
-  { label: "Skills",       path: "/skills",              roles: ["admin","hr"] },
-  { label: "Apply Leave",  path: "/leave/apply",         roles: ["user","employee"] },
-  { label: "My Leaves",    path: "/leave/my",            roles: ["user","employee","admin","hr","manager"] },
-  { label: "Approvals",    path: "/leave/approvals",     roles: ["admin","hr","manager"] },
+  // ── Core ──
+  { label: "Dashboard",    path: "/dashboard",          icon: "📊", roles: ["admin","hr","manager","user","employee"] },
+  { label: "Search",       path: "/search",             icon: "🔍", roles: ["admin","hr","manager","user","employee"] },
+
+  // ── Employee Management ──
+  { label: "Employees",    path: "/employees",          icon: "👥", roles: ["admin","hr","manager"] },
+  { label: "Departments",  path: "/departments",        icon: "🏢", roles: ["admin","hr"] },
+  { label: "Skills",       path: "/skills",             icon: "💡", roles: ["admin","hr"] },
+
+  // ── Leave Management ──
+  { label: "Apply Leave",  path: "/leave/apply",        icon: "📝", roles: ["user","employee"] },
+  { label: "My Leaves",    path: "/leave/my",           icon: "📅", roles: ["user","employee","admin","hr","manager"] },
+  { label: "Approvals",    path: "/leave/approvals",    icon: "✅", roles: ["admin","hr","manager"] },
+
+  // ── Asset Management ──
+  { label: "Assets",       path: "/assets",             icon: "💻", roles: ["admin","hr","manager","user","employee"] },
+
+  // ── Notifications ──
+  { label: "Notifications",path: "/notifications",      icon: "🔔", roles: ["admin","hr","manager","user","employee"] },
+
+  // ── Admin Only ──
+  { label: "Audit Logs",   path: "/audit-logs",         icon: "🔍", roles: ["admin"] },
+  { label: "Reports",      path: "/reports",            icon: "📈", roles: ["admin","hr","manager"] },
+];
+
+const navGroups = [
+  { title: "Core",              keys: ["Dashboard", "Search"] },
+  { title: "Employees",         keys: ["Employees", "Departments", "Skills"] },
+  { title: "Leave",             keys: ["Apply Leave", "My Leaves", "Approvals"] },
+  { title: "Assets",            keys: ["Assets"] },
+  { title: "Notifications",     keys: ["Notifications"] },
+  { title: "Admin",             keys: ["Audit Logs", "Reports"] },
 ];
 
 function Sidebar() {
@@ -33,17 +58,27 @@ function Sidebar() {
       </div>
 
       <nav className="sidebar-nav">
-        {filtered.map((item) => (
-          <NavLink
-            key={item.path}
-            to={item.path}
-            className={({ isActive }) =>
-              `sidebar-link ${isActive ? "active" : ""}`
-            }
-          >
-            {item.label}
-          </NavLink>
-        ))}
+        {navGroups.map((group) => {
+          const items = filtered.filter((i) => group.keys.includes(i.label));
+          if (!items.length) return null;
+          return (
+            <div key={group.title} className="sidebar-group">
+              <div className="sidebar-group-label">{group.title}</div>
+              {items.map((item) => (
+                <NavLink
+                  key={item.path}
+                  to={item.path}
+                  className={({ isActive }) =>
+                    `sidebar-link ${isActive ? "active" : ""}`
+                  }
+                >
+                  <span className="sidebar-link-icon">{item.icon}</span>
+                  {item.label}
+                </NavLink>
+              ))}
+            </div>
+          );
+        })}
       </nav>
 
       <div className="sidebar-footer">

@@ -1,0 +1,96 @@
+.notif-page-list {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+  max-width: 780px;
+}
+
+.notif-page-item {
+  display: flex;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.notif-page-item:last-child { border-bottom: none; }
+.notif-page-item:hover { background: var(--surface-2); }
+
+.notif-page-item--unread {
+  background: var(--accent-light);
+}
+
+.notif-page-dot-col {
+  width: 12px;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 6px;
+  flex-shrink: 0;
+}
+
+.notif-page-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: block;
+}
+
+.notif-page-body { flex: 1; min-width: 0; }
+
+.notif-page-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.notif-page-msg {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+
+.notif-page-time {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.notif-page-empty {
+  text-align: center;
+  padding: 64px 32px;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  max-width: 480px;
+}
+
+.notif-page-empty-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.notif-page-empty p {
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+/* JSON in audit logs */
+.audit-json {
+  font-size: 11px;
+  background: var(--surface-2);
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  max-width: 200px;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+  color: var(--text);
+  font-family: monospace;
+}

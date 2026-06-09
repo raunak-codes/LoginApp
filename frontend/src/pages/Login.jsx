@@ -3,6 +3,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "./Auth.css";
+const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 
 function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -20,11 +22,11 @@ function Login() {
     setLoading(true);
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        `${API}/api/auth/login`,
         form
       );
       // fetch profile to get role + name
-      const profile = await axios.get("http://localhost:5000/api/user/profile", {
+      const profile = await axios.get(`${API}/api/user/profile`, {
         headers: { Authorization: res.data.token },
       });
       login(res.data.token, profile.data);

@@ -1,0 +1,120 @@
+.history-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 640px;
+}
+
+.history-item {
+  display: flex;
+  gap: 16px;
+  position: relative;
+  padding-bottom: 24px;
+}
+
+.history-item:last-child { padding-bottom: 0; }
+
+.history-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.history-line {
+  position: absolute;
+  left: 21px;
+  top: 44px;
+  bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+
+.history-item:last-child .history-line { display: none; }
+
+.history-content {
+  flex: 1;
+  padding-top: 10px;
+}
+
+.history-action {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  text-transform: capitalize;
+  margin-bottom: 4px;
+}
+
+.history-remarks {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-bottom: 6px;
+}
+
+.history-meta {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.history-empty {
+  padding: 40px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.asset-info-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.asset-info-row { display: flex; flex-direction: column; gap: 4px; }
+.asset-info-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); font-weight: 600; }
+.asset-info-value { font-size: 14px; font-weight: 500; color: var(--text); }
+
+.form-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  max-width: 640px;
+}
+
+.alert-success {
+  background: var(--success-light);
+  color: var(--success);
+  border: 1px solid var(--success);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.alert-error {
+  background: var(--danger-light);
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}

@@ -4,6 +4,8 @@ import { useAuth } from "../context/AuthContext";
 import Layout from "../components/Layout";
 import Card from "../components/Card";
 import Button from "../components/Button";
+const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 
 function ApplyLeave() {
   const { token } = useAuth();
@@ -16,7 +18,7 @@ function ApplyLeave() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/leave/types", {
+      .get(`${API}/api/leave/types`, {
         headers: { Authorization: token },
       })
       .then((r) => setLeaveTypes(r.data))
@@ -30,7 +32,7 @@ function ApplyLeave() {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post("http://localhost:5000/api/leave/apply", form, {
+      await axios.post(`${API}/api/leave/apply`, form, {
         headers: { Authorization: token },
       });
       setSuccess(true);

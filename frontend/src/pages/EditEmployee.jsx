@@ -5,6 +5,8 @@ import { useAuth } from "../context/AuthContext";
 import Layout from "../components/Layout";
 import Card from "../components/Card";
 import Button from "../components/Button";
+const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 
 function EditEmployee() {
   const { id } = useParams();
@@ -18,8 +20,8 @@ function EditEmployee() {
 
   useEffect(() => {
     const h = { headers: { Authorization: token } };
-    axios.get("http://localhost:5000/api/departments", h).then((r) => setDepartments(r.data));
-    axios.get(`http://localhost:5000/api/employees/${id}`, h).then((r) => {
+    axios.get(`${API}/api/departments`, h).then((r) => setDepartments(r.data));
+    axios.get(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/employees/${id}`, h).then((r) => {
       const { department_id, phone, address, designation, salary } = r.data;
       setForm({ department_id, phone, address, designation, salary });
     });
@@ -31,7 +33,7 @@ function EditEmployee() {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.put(`http://localhost:5000/api/employees/${id}`, form, {
+      await axios.put(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/employees/${id}`, form, {
         headers: { Authorization: token },
       });
       navigate("/employees");

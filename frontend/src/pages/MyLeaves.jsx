@@ -6,6 +6,8 @@ import Card from "../components/Card";
 import Table from "../components/Table";
 import StatusBadge from "../components/StatusBadge";
 import Loader from "../components/Loader";
+const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 
 function MyLeaves() {
   const { token } = useAuth();
@@ -14,7 +16,7 @@ function MyLeaves() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/leave/my", {
+      .get(`${API}/api/leave/my`, {
         headers: { Authorization: token },
       })
       .then((r) => setLeaves(r.data))

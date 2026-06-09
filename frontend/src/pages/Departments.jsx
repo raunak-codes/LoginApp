@@ -5,6 +5,8 @@ import Layout from "../components/Layout";
 import Card from "../components/Card";
 import Button from "../components/Button";
 import Table from "../components/Table";
+const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 
 function Departments() {
   const { token } = useAuth();
@@ -13,7 +15,7 @@ function Departments() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/departments", {
+      .get(`${API}/api/departments`, {
         headers: { Authorization: token },
       })
       .then((r) => setDepartments(r.data));
@@ -23,7 +25,7 @@ function Departments() {
     e.preventDefault();
     if (!name.trim()) return;
     const res = await axios.post(
-      "http://localhost:5000/api/departments",
+      `${API}/api/departments`,
       { department_name: name },
       { headers: { Authorization: token } }
     );

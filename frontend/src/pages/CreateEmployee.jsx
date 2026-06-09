@@ -5,6 +5,8 @@ import { useAuth } from "../context/AuthContext";
 import Layout from "../components/Layout";
 import Card from "../components/Card";
 import Button from "../components/Button";
+const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 
 function CreateEmployee() {
   const { token } = useAuth();
@@ -20,8 +22,8 @@ function CreateEmployee() {
 
   useEffect(() => {
     const h = { headers: { Authorization: token } };
-    axios.get("http://localhost:5000/api/departments", h).then((r) => setDepartments(r.data));
-    axios.get("http://localhost:5000/api/skills", h).then((r) => setSkills(r.data));
+    axios.get(`${API}/api/departments`, h).then((r) => setDepartments(r.data));
+    axios.get(`${API}/api/skills`, h).then((r) => setSkills(r.data));
   }, [token]);
 
   const handleChange = (e) =>
@@ -36,14 +38,14 @@ function CreateEmployee() {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post("http://localhost:5000/api/employees", form, {
+      const res = await axios.post(`${API}/api/employees`, form, {
         headers: { Authorization: token },
       });
       if (images.length > 0) {
         const fd = new FormData();
         fd.append("employee_id", res.data.id);
         Array.from(images).forEach((f) => fd.append("images", f));
-        await axios.post("http://localhost:5000/api/employees/upload", fd, {
+        await axios.post(`${API}/api/employees/upload`, fd, {
           headers: { Authorization: token },
         });
       }

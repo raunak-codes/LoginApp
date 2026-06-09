@@ -65,7 +65,7 @@ router.post("/", auth, async (req, res) => {
 router.get("/", auth, async (req, res) => {
   try {
     const result = await pool.query(`
-      SELECT ep.id, u.name, u.email, d.department_name,
+      SELECT ep.id, ep.user_id, u.name, u.email, d.department_name,
              ep.phone, ep.designation, ep.salary
       FROM employee_profiles ep
       INNER JOIN users u ON ep.user_id = u.id
@@ -76,6 +76,7 @@ router.get("/", auth, async (req, res) => {
     res.status(500).json(error.message);
   }
 });
+
 
 // GET /api/employees/:id — single employee with skills (JOIN Query 2)
 router.get("/:id", auth, async (req, res) => {

@@ -3,12 +3,39 @@
   min-height: 100vh;
 }
 
-.layout-main {
+.layout-body {
   margin-left: 220px;
   flex: 1;
-  padding: 32px;
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
 }
+
+.layout-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 56px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 28px;
+  box-shadow: var(--shadow-sm);
+}
+
+.layout-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.layout-main {
+  flex: 1;
+  padding: 32px;
+}
+
 
 .page-header {
   margin-bottom: 28px;

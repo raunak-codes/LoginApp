@@ -7,6 +7,8 @@ import Table from "../components/Table";
 import Button from "../components/Button";
 import Loader from "../components/Loader";
 import Card from "../components/Card";
+const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 
 function EmployeeList() {
   const { token } = useAuth();
@@ -16,7 +18,7 @@ function EmployeeList() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/employees", {
+      .get(`${API}/api/employees`, {
         headers: { Authorization: token },
       })
       .then((res) => setEmployees(res.data))
@@ -26,7 +28,7 @@ function EmployeeList() {
 
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this employee?")) return;
-    await axios.delete(`http://localhost:5000/api/employees/${id}`, {
+    await axios.delete(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/employees/${id}`, {
       headers: { Authorization: token },
     });
     setEmployees(employees.filter((e) => e.id !== id));

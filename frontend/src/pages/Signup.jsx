@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Auth.css";
+const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 
 function Signup() {
   const [form, setForm] = useState({ name: "", email: "", password: "", role: "user" });
@@ -17,7 +19,7 @@ function Signup() {
     setError("");
     setLoading(true);
     try {
-      await axios.post("http://localhost:5000/api/auth/signup", form);
+      await axios.post(`${API}/api/auth/signup`, form);
       navigate("/");
     } catch (err) {
       setError(err.response?.data?.message || "Signup failed");

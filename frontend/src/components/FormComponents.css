@@ -1,0 +1,111 @@
+/* ── Generic Form Components CSS ── */
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.01em;
+}
+
+.form-required {
+  color: var(--danger);
+  margin-left: 3px;
+}
+
+.form-control {
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 14px;
+  font-family: var(--font-body);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  width: 100%;
+}
+
+.form-control:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+.form-control--error {
+  border-color: var(--danger);
+}
+
+.form-control--error:focus {
+  box-shadow: 0 0 0 3px var(--danger-light);
+}
+
+.form-hint {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.form-error-msg {
+  font-size: 12px;
+  color: var(--danger);
+  font-weight: 500;
+}
+
+/* ── FormTable ── */
+.form-table-wrapper {
+  overflow-x: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.form-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.form-table thead {
+  background: var(--surface-2);
+}
+
+.form-table th {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.form-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  vertical-align: middle;
+}
+
+.form-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.form-table tbody tr:hover {
+  background: var(--surface-2);
+}
+
+.form-table-row--clickable {
+  cursor: pointer;
+}
+
+.form-table-empty {
+  text-align: center;
+  padding: 40px 16px;
+  color: var(--text-muted);
+  font-size: 14px;
+}

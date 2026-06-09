@@ -5,6 +5,8 @@ import Layout from "../components/Layout";
 import Card from "../components/Card";
 import Button from "../components/Button";
 import Table from "../components/Table";
+const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 
 function Skills() {
   const { token } = useAuth();
@@ -13,7 +15,7 @@ function Skills() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/skills", {
+      .get(`${API}/api/skills`, {
         headers: { Authorization: token },
       })
       .then((r) => setSkills(r.data));
@@ -23,7 +25,7 @@ function Skills() {
     e.preventDefault();
     if (!name.trim()) return;
     const res = await axios.post(
-      "http://localhost:5000/api/skills",
+      `${API}/api/skills`,
       { skill_name: name },
       { headers: { Authorization: token } }
     );

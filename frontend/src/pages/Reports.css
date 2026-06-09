@@ -1,0 +1,50 @@
+.reports-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 720px;
+}
+
+.report-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.report-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateX(2px);
+}
+
+.report-icon {
+  font-size: 36px;
+  flex-shrink: 0;
+}
+
+.report-info {
+  flex: 1;
+}
+
+.report-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.report-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.report-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
