@@ -1,11 +1,18 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import Layout from "../components/Layout";
+import Table from "../components/Table";
+import Button from "../components/Button";
+import Loader from "../components/Loader";
+import Card from "../components/Card";
 
 function EmployeeList() {
-  const [employees, setEmployees] = useState([]);
+  const { token } = useAuth();
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
+  const [employees, setEmployees] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
@@ -13,54 +20,68 @@ function EmployeeList() {
         headers: { Authorization: token },
       })
       .then((res) => setEmployees(res.data))
-      .catch((err) => console.error(err));
+      .catch(console.error)
+      .finally(() => setLoading(false));
   }, [token]);
 
   const handleDelete = async (id) => {
+    if (!window.confirm("Delete this employee?")) return;
     await axios.delete(`http://localhost:5000/api/employees/${id}`, {
       headers: { Authorization: token },
     });
     setEmployees(employees.filter((e) => e.id !== id));
   };
 
+  const columns = [
+    { key: "name",            label: "Name" },
+    { key: "email",           label: "Email" },
+    { key: "department_name", label: "Department" },
+    { key: "designation",     label: "Designation" },
+    { key: "phone",           label: "Phone" },
+    { key: "salary",          label: "Salary", render: (v) => v ? `₹${Number(v).toLocaleString()}` : "—" },
+  ];
+
   return (
-    <div>
-      <h2>Employee List</h2>
-      <button onClick={() => navigate("/employees/create")}>
-        Add Employee
-      </button>
-      <table border="1" cellPadding="8">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Department</th>
-            <th>Designation</th>
-            <th>Phone</th>
-            <th>Salary</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {employees.map((emp) => (
-            <tr key={emp.id}>
-              <td>{emp.name}</td>
-              <td>{emp.email}</td>
-              <td>{emp.department_name}</td>
-              <td>{emp.designation}</td>
-              <td>{emp.phone}</td>
-              <td>{emp.salary}</td>
-              <td>
-                <button onClick={() => navigate(`/employees/edit/${emp.id}`)}>
+    <Layout>
+      <div className="page-actions">
+        <div className="page-header" style={{ marginBottom: 0 }}>
+          <h2>Employees</h2>
+          <p>All registered employee profiles</p>
+        </div>
+        <Button onClick={() => navigate("/employees/create")}>
+          + Add Employee
+        </Button>
+      </div>
+
+      <Card style={{ padding: 0 }}>
+        {loading ? (
+          <Loader />
+        ) : (
+          <Table
+            columns={columns}
+            data={employees}
+            actions={(row) => (
+              <>
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  onClick={() => navigate(`/employees/edit/${row.id}`)}
+                >
                   Edit
-                </button>
-                <button onClick={() => handleDelete(emp.id)}>Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+                </Button>
+                <Button
+                  size="sm"
+                  variant="danger"
+                  onClick={() => handleDelete(row.id)}
+                >
+                  Delete
+                </Button>
+              </>
+            )}
+          />
+        )}
+      </Card>
+    </Layout>
   );
 }
 

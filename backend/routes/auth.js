@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 // POST /api/auth/signup
 router.post("/signup", async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, role } = req.body;
 
     const userExist = await pool.query(
       "SELECT * FROM users WHERE email=$1",
@@ -21,9 +21,12 @@ router.post("/signup", async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
+    const validRoles = ["admin", "hr", "manager", "employee", "user"];
+    const assignedRole = validRoles.includes(role) ? role : "user";
+
     const newUser = await pool.query(
-      `INSERT INTO users(name, email, password) VALUES($1, $2, $3) RETURNING *`,
-      [name, email, hashedPassword]
+      `INSERT INTO users(name, email, password, role) VALUES($1, $2, $3, $4) RETURNING *`,
+      [name, email, hashedPassword, assignedRole]
     );
 
     res.status(201).json({ message: "User Registered", user: newUser.rows[0] });

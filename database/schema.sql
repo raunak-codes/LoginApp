@@ -71,3 +71,46 @@ CREATE TABLE employee_skills (
 	skill_id INT REFERENCES skills(id)
 );
 
+-- 11. Leave Types
+CREATE TABLE leave_types (
+    id SERIAL PRIMARY KEY,
+    leave_name VARCHAR(100),
+    total_days INT
+);
+
+INSERT INTO leave_types(leave_name, total_days) VALUES
+    ('Casual Leave', 12),
+    ('Sick Leave', 10),
+    ('Earned Leave', 15),
+    ('Maternity Leave', 180);
+
+-- 12. Leave Balance
+CREATE TABLE leave_balance (
+    id SERIAL PRIMARY KEY,
+    employee_id INT REFERENCES users(id),
+    leave_type_id INT REFERENCES leave_types(id),
+    available_days INT
+);
+
+-- 13. Leave Applications
+CREATE TABLE leave_applications (
+    id SERIAL PRIMARY KEY,
+    employee_id INT REFERENCES users(id),
+    leave_type_id INT REFERENCES leave_types(id),
+    from_date DATE,
+    to_date DATE,
+    total_days INT,
+    reason TEXT,
+    status VARCHAR(30) DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+ 
+-- 14. Approval History (Audit Log)
+CREATE TABLE approval_history (
+    id SERIAL PRIMARY KEY,
+    leave_id INT REFERENCES leave_applications(id),
+    approved_by INT REFERENCES users(id),
+    action VARCHAR(50),
+    remarks TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
