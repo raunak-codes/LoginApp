@@ -24,7 +24,7 @@ function AssetAllocation() {
 
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/assets/${id}`, { headers: { Authorization: token } }).then((r) => setAsset(r.data));
-    axios.get(`${API}/api/employees`, { headers: { Authorization: token } }).then((r) => setEmployees(r.data));
+    axios.get(`${API}/api/employees?limit=1000`, { headers: { Authorization: token } }).then((r) => setEmployees(r.data.data || []));
   }, [id, token]);
 
   const handleAllocate = async (e) => {

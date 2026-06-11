@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const auth = require("../../middleware/auth");
+const auth = require("../middleware/auth");
 const auditRepository = require("../repositories/auditRepository");
 
 // GET /api/audit-logs — paginated audit trail (admin only)

@@ -33,76 +33,49 @@ A modern, full-stack Employee and Leave Management System built with **React**, 
 ```
 LoginApp/
 ├── backend/
-│   ├── config/
-│   │   └── db.js               # PostgreSQL pool connection configuration
-│   ├── middleware/
-│   │   ├── auth.js             # JWT verification middleware
-│   │   └── authorize.js        # Role-based request authorization
-│   ├── routes/                 # Core API endpoints
-│   │   ├── auth.js             # User Signup and Login endpoints
-│   │   ├── departments.js      # Fetch and add departments
-│   │   ├── employees.js        # CRUD, Multi-image upload, and statistics
-│   │   ├── leave.js            # Leave application, approvals, and balance management
-│   │   ├── skills.js           # Fetch and add skills
-│   │   └── user.js             # Get logged-in user profile details
-│   ├── src/                    # Enterprise MVC Features
-│   │   ├── controllers/        # Business logic controllers (Assets, Search, etc.)
-│   │   ├── repositories/       # Data Access Layer querying PostgreSQL
-│   │   ├── routes/             # Endpoints for Assets, Audit, Notifications, Search
-│   │   ├── services/           # Orchestration layer for transactions/notifications
-│   │   ├── utils/              # Utilities (e.g., central logger)
-│   │   └── validators/         # Joi schema models validating payloads
-│   ├── uploads/                # Directory storing uploaded employee images
-│   ├── .env                    # Environment variables (DB credentials, secret keys)
-│   ├── server.js               # Express application entrypoint
-│   └── package.json            # Backend dependencies & scripts
+│   ├── src/                    # Main application source folder
+│   │   ├── config/             # Database connection, env loader, initialization
+│   │   │   ├── db.js
+│   │   │   ├── env.js
+│   │   │   └── initDb.js
+│   │   ├── controllers/        # Express controllers (Asset, Leave, Employees, etc.)
+│   │   ├── jobs/               # Background task scheduler (cronJobs.js)
+│   │   ├── middleware/         # Security, File-upload, and Request-counter middlewares
+│   │   │   ├── auth.js
+│   │   │   ├── authorize.js
+│   │   │   ├── errorHandler.js
+│   │   │   ├── requestCounter.js
+│   │   │   └── upload.js
+│   │   ├── repositories/       # Data Access Object pattern mapping PG tables
+│   │   ├── routes/             # API endpoints
+│   │   │   └── v2/             # Modernized v2 endpoints (e.g., paginated employees)
+│   │   ├── services/           # Business transactional logic layer (e.g., emails)
+│   │   ├── utils/              # Helper utilities (winston logger, memory caching)
+│   │   └── validators/         # Joi validation payload schemas
+│   ├── uploads/                # Local directory for uploaded user photos
+│   ├── .env                    # Environment credentials
+│   ├── Dockerfile              # Docker image definition for backend Node app
+│   ├── server.js               # Main server entrypoint
+│   └── package.json            # Backend dependency manifest
 │
 ├── frontend/
 │   ├── src/
-│   │   ├── components/         # Reusable presentation and layout components
-│   │   │   ├── Button.jsx & .css
-│   │   │   ├── Card.jsx & .css
-│   │   │   ├── Layout.jsx & .css
-│   │   │   ├── Loader.jsx & .css
-│   │   │   ├── Modal.jsx & .css
-│   │   │   ├── ProtectedRoute.jsx
-│   │   │   ├── Sidebar.jsx & .css
-│   │   │   ├── StatusBadge.jsx & .css
-│   │   │   └── Table.jsx & .css
-│   │   ├── context/
-│   │   │   └── AuthContext.jsx # Global JWT authentication state provider
-│   │   ├── pages/              # View pages of the client application
-│   │   │   ├── ApplyLeave.jsx  # Page to apply for a leave
-│   │   │   ├── AssetAllocation.jsx
-│   │   │   ├── AssetHistory.jsx & .css
-│   │   │   ├── Assets.jsx & .css
-│   │   │   ├── AuditLogs.jsx
-│   │   │   ├── Auth.css        # Shared styles for login/signup
-│   │   │   ├── CreateAsset.jsx
-│   │   │   ├── CreateEmployee.jsx
-│   │   │   ├── Dashboard.jsx & .css # Admin statistics and charts overview
-│   │   │   ├── Departments.jsx # Department list and submission
-│   │   │   ├── EditEmployee.jsx
-│   │   │   ├── EmployeeList.jsx
-│   │   │   ├── LeaveApprovals.jsx
-│   │   │   ├── Login.jsx
-│   │   │   ├── MyLeaves.jsx    # Current user's leave applications
-│   │   │   ├── Notifications.jsx & .css
-│   │   │   ├── Reports.jsx & .css
-│   │   │   ├── Search.jsx & .css
-│   │   │   ├── Signup.jsx
-│   │   │   └── Skills.jsx      # Skill list and submission
-│   │   ├── routes/
-│   │   │   └── AppRoutes.jsx   # Route registration & protection
-│   │   ├── styles/
-│   │   │   └── global.css      # Core global application styling definitions
-│   │   ├── App.jsx             # Top-level React container
-│   │   ├── index.js            # Frontend entrypoint
-│   │   └── package.json        # Frontend dependencies & scripts
+│   │   ├── components/         # Premium styling layout elements (Sidebar, Table, etc.)
+│   │   ├── context/            # React global authentication status (AuthContext)
+│   │   ├── pages/              # SPA dashboard and workflow pages
+│   │   ├── routes/             # App routing registry (AppRoutes.jsx)
+│   │   ├── styles/             # Application global styling variables (global.css)
+│   │   ├── App.jsx             # React master component
+│   │   └── index.js            # React mounting node
+│   ├── Dockerfile              # Nginx server image configuration for hosting React build
+│   └── package.json            # Frontend dependency manifest
 │   
-└── database/
-    ├── schema.sql              # Relational schema setup & initial seeds
-    └── migrate_enterprise.sql  # Updates for Assets, Auditing, and Notifications
+├── database/
+│   ├── schema.sql              # Relational database table schemas
+│   ├── migrate_enterprise.sql  # Enterprise features migration (Assets, notifications)
+│   └── migrate_enterprise_v2.sql # Performance optimizations (indexes, summary views)
+│
+└── docker-compose.yml          # Container configuration for local deployment orchestrations
 ```
 
 ---
@@ -112,14 +85,17 @@ LoginApp/
 ### 1. Database Setup
 
 1. Open your PostgreSQL server (e.g., via `psql` or pgAdmin).
-2. Execute the commands/queries inside [schema.sql](file:///d:/LoginApp/database/schema.sql) and then [migrate_enterprise.sql](file:///d:/LoginApp/database/migrate_enterprise.sql) to initialize the database tables and prepopulate the default departments, skills, leave types, and custom enterprise metrics.
+2. Execute the database files in sequential order: [schema.sql](file:///d:/LoginApp/database/schema.sql), [migrate_enterprise.sql](file:///d:/LoginApp/database/migrate_enterprise.sql), and [migrate_enterprise_v2.sql](file:///d:/LoginApp/database/migrate_enterprise_v2.sql) to initialize tables, seed metrics, create indexes, and build database views.
 
 ```bash
 # Initialize core schema
 psql -U postgres -f database/schema.sql
 
-# Migrate enterprise enhancements
+# Migrate enterprise enhancements (v1)
 psql -U postgres -d loginapp -f database/migrate_enterprise.sql
+
+# Optimize database and register custom dashboard views (v2)
+psql -U postgres -d loginapp -f database/migrate_enterprise_v2.sql
 ```
 
 ### 2. Backend Setup
@@ -132,7 +108,7 @@ psql -U postgres -d loginapp -f database/migrate_enterprise.sql
    ```bash
    npm install
    ```
-3. Create a `.env` file in the root of the `backend/` folder (configured based on the `.env` template):
+3. Create a `.env` file in the root of the `backend/` folder:
    ```env
    PORT=5000
    DB_USER=postgres
@@ -141,12 +117,29 @@ psql -U postgres -d loginapp -f database/migrate_enterprise.sql
    DB_PASSWORD=your_postgres_password
    DB_PORT=5432
    JWT_SECRET=your_jwt_secret_key
+
+   # SMTP configuration for actual email dispatch (e.g., Gmail)
+   SMTP_HOST=smtp.gmail.com
+   SMTP_PORT=587
+   SMTP_SECURE=false
+   SMTP_USER=your_email@gmail.com
+   SMTP_PASS=your_gmail_app_password
    ```
 4. Start the backend developer server:
    ```bash
    npm run dev
    ```
    *The server runs locally at: `http://localhost:5000`*
+
+### 📬 Email & SMTP Configuration
+
+The system integrates **Nodemailer** to dispatch transactional email alerts:
+- **Automatic Triggers**:
+  - **Employee Welcome**: Sent to new employees upon registration.
+  - **Leave Status Updates**: Sent to employees when their leave request is approved or rejected.
+  - **Asset Updates**: Sent when an asset is allocated or returned.
+- **Mock Mode**: If `SMTP_HOST` is not defined in `.env`, the system runs a mock JSON transporter which logs mock email details to the console/combined log.
+- **Gmail Setup**: To send real emails via Gmail, enable 2-Step Verification on your Google Account, generate a 16-character **App Password**, and use it as `SMTP_PASS`.
 
 ### 3. Frontend Setup
 
@@ -164,6 +157,25 @@ psql -U postgres -d loginapp -f database/migrate_enterprise.sql
    ```
    *The client web app starts locally at: `http://localhost:3000`*
 
+### 🐳 Docker Compose Deployment (Local Orchestration)
+
+The project includes Docker configurations for building and running all components (Frontend, Backend, PostgreSQL) as containers.
+
+1. Build and run all services in detached mode:
+   ```bash
+   docker-compose up --build -d
+   ```
+2. Verify all containers are running:
+   ```bash
+   docker-compose ps
+   ```
+3. To initialize the database tables and prepopulate seed data on the Docker instance:
+   ```bash
+   docker exec -i peopledesk-postgres psql -U postgres -d loginapp < database/schema.sql
+   docker exec -i peopledesk-postgres psql -U postgres -d loginapp < database/migrate_enterprise.sql
+   docker exec -i peopledesk-postgres psql -U postgres -d loginapp < database/migrate_enterprise_v2.sql
+   ```
+
 ---
 
 ## 🌐 API Reference
@@ -177,7 +189,7 @@ All requests must be made to the backend endpoint `http://localhost:5000`.
 | `POST` | `/api/auth/login` | Login and return standard JWT bearer token | No |
 | `GET` | `/api/user/profile` | Retrieve profile information for the authenticated user | Yes |
 
-### Employee Profiles
+### Employee Profiles (v1)
 | Method | Endpoint | Description | Protected |
 | :--- | :--- | :--- | :--- |
 | `GET` | `/api/employees` | Retrieve list of all employees (Join query with department) | Yes |
@@ -187,6 +199,11 @@ All requests must be made to the backend endpoint `http://localhost:5000`.
 | `DELETE` | `/api/employees/:id` | Delete employee record & associated profile images | Yes |
 | `POST` | `/api/employees/upload` | Multipart upload (Multer) for up to 5 profile images | Yes |
 | `GET` | `/api/employees/stats/count` | Retrieve counts for Dashboard stats cards | Yes |
+
+### Employee Profiles (v2)
+| Method | Endpoint | Description | Protected |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/api/v2/employees` | Retrieve paginated list of employees with modernized nested schema structure | Yes |
 
 ### Departments & Skills
 | Method | Endpoint | Description | Protected |
@@ -226,6 +243,12 @@ All requests must be made to the backend endpoint `http://localhost:5000`.
 | `GET` | `/api/audit-logs` | Retrieve database audit logs (Admin only) | Yes |
 | `GET` | `/api/search` | Search across employees and assets | Yes |
 | `GET` | `/api/dashboard/stats` | Advanced dashboard charts data | Yes |
+
+### Health Checks & Performance Monitoring
+| Method | Endpoint | Description | Protected |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/api/health` | Simple service status check | No |
+| `GET` | `/api/health/details` | System-level uptime, memory usage, CPU load, active request counters | No |
 
 ---
 

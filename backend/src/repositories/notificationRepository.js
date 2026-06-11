@@ -1,4 +1,4 @@
-const pool = require("../../config/db");
+const pool = require("../config/db");
 
 const notificationRepository = {
   create: async ({ user_id, title, message }) => {

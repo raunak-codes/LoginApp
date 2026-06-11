@@ -1,4 +1,4 @@
-const pool = require("../../config/db");
+const pool = require("../config/db");
 
 const auditRepository = {
   log: async ({ table_name, action_type, record_id, old_data, new_data, performed_by }) => {

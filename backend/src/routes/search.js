@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const auth = require("../../middleware/auth");
-const pool = require("../../config/db");
+const auth = require("../middleware/auth");
+const pool = require("../config/db");
 
 // GET /api/search?q=term — global search across employees, assets, departments
 router.get("/", auth, async (req, res, next) => {

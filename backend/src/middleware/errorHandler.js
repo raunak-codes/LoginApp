@@ -5,13 +5,23 @@ const logger = require("../utils/logger");
  * Catches all errors thrown in route handlers or next(err) calls.
  */
 function errorHandler(err, req, res, next) {
-  logger.error(err.message || "Unexpected error", err);
+  // Log the error
+  logger.error(err.message || "Unexpected error", { stack: err.stack });
 
   // Joi validation errors
-  if (err.isJoi || err.name === "ValidationError") {
-    return res.status(400).json({
+  if (err.isJoi) {
+    return res.status(422).json({
       error: "Validation Error",
       details: err.details ? err.details.map((d) => d.message) : err.message,
+    });
+  }
+
+  // Custom AppError instances (like ValidationError, NotFoundError, etc.)
+  if (err.status) {
+    return res.status(err.status).json({
+      error: err.name,
+      message: err.message,
+      details: err.details || undefined,
     });
   }
 
@@ -29,9 +39,11 @@ function errorHandler(err, req, res, next) {
   }
 
   // Default server error
-  return res.status(err.status || 500).json({
-    error: err.message || "Internal Server Error",
+  return res.status(500).json({
+    error: "InternalServerError",
+    message: err.message || "Internal Server Error",
   });
 }
 
 module.exports = errorHandler;
+

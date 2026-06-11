@@ -1,7 +1,9 @@
 const assetRepository = require("../repositories/assetRepository");
 const auditRepository = require("../repositories/auditRepository");
 const notificationRepository = require("../repositories/notificationRepository");
-const pool = require("../../config/db");
+const pool = require("../config/db");
+const emailService = require("./emailService");
+const logger = require("../utils/logger");
 
 const assetService = {
   listAssets: async (query) => {
@@ -69,9 +71,10 @@ const assetService = {
     if (!asset) throw Object.assign(new Error("Asset not found"), { status: 404 });
     if (asset.status !== "available") throw Object.assign(new Error("Asset is not available for allocation"), { status: 400 });
 
-    // Get employee name for notification
-    const empResult = await pool.query("SELECT name FROM users WHERE id = $1", [employee_id]);
+    // Get employee details for notification and email
+    const empResult = await pool.query("SELECT name, email FROM users WHERE id = $1", [employee_id]);
     const empName = empResult.rows[0]?.name || "Unknown Employee";
+    const empEmail = empResult.rows[0]?.email;
 
     const allocation = await assetRepository.allocate(asset_id, employee_id, allocated_by, remarks);
 
@@ -81,6 +84,12 @@ const assetService = {
       title: "Asset Assigned to You",
       message: `${asset.asset_name} (${asset.asset_code}) has been assigned to you.`,
     });
+
+    // Send email alert in background
+    if (empEmail) {
+      emailService.sendAssetAllocationEmail(empEmail, empName, asset.asset_name, asset.asset_code, "allocated")
+        .catch(err => logger.error(`Failed to send asset allocation email: ${err.message}`));
+    }
 
     // Audit log
     await auditRepository.log({
@@ -100,7 +109,23 @@ const assetService = {
     if (!asset) throw Object.assign(new Error("Asset not found"), { status: 404 });
     if (asset.status !== "allocated") throw Object.assign(new Error("Asset is not currently allocated"), { status: 400 });
 
+    // Fetch user assigned to this asset for email notification
+    const allocResult = await pool.query(
+      `SELECT u.name, u.email FROM asset_allocations aa
+       INNER JOIN users u ON aa.employee_id = u.id
+       WHERE aa.asset_id = $1 AND aa.status = 'active' LIMIT 1`,
+      [asset_id]
+    );
+
     await assetRepository.returnAsset(asset_id, returned_by, remarks);
+
+    if (allocResult.rows.length > 0) {
+      const empName = allocResult.rows[0].name;
+      const empEmail = allocResult.rows[0].email;
+
+      emailService.sendAssetAllocationEmail(empEmail, empName, asset.asset_name, asset.asset_code, "returned")
+        .catch(err => logger.error(`Failed to send asset return email: ${err.message}`));
+    }
 
     await auditRepository.log({
       table_name: "asset_allocations",

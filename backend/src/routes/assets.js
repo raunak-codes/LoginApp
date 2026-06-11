@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const auth = require("../../middleware/auth");
+const auth = require("../middleware/auth");
 const assetController = require("../controllers/assetController");
 
 // GET /api/assets/types — distinct asset types (before :id routes)

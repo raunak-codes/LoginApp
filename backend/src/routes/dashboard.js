@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const auth = require("../../middleware/auth");
-const pool = require("../../config/db");
+const auth = require("../middleware/auth");
+const pool = require("../config/db");
 
 // GET /api/dashboard/stats — comprehensive dashboard statistics
 router.get("/stats", auth, async (req, res, next) => {

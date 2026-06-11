@@ -3,3 +3,32 @@
 2026-06-09 12:44:52 [error]: ValidationError: "remarks" is not allowed to be empty
 2026-06-09 12:46:27 [error]: ValidationError: "remarks" is not allowed to be empty
 2026-06-09 12:48:51 [error]: ValidationError: "remarks" is not allowed to be empty
+2026-06-10 15:33:32 [error]: ValidationError: "to_date" must be greater than or equal to "from_date"
+2026-06-10 15:33:33 [error]: ValidationError: "user_id" is required. "department_id" is required. "salary" is required
+2026-06-10 15:33:33 [error]: ValidationError: "email" must be a valid email
+2026-06-10 15:33:52 [error]: ValidationError: "user_id" is required. "department_id" is required. "salary" is required
+2026-06-10 15:33:53 [error]: ValidationError: "email" must be a valid email
+2026-06-10 15:33:53 [error]: ValidationError: "to_date" must be greater than or equal to "from_date"
+2026-06-10 15:34:05 [error]: ValidationError: "user_id" is required. "department_id" is required. "salary" is required
+2026-06-10 15:34:06 [error]: ValidationError: "email" must be a valid email
+2026-06-10 15:34:06 [error]: ValidationError: "to_date" must be greater than or equal to "from_date"
+2026-06-10 15:36:04 [error]: ValidationError: "to_date" must be greater than or equal to "from_date"
+2026-06-10 15:36:04 [error]: ValidationError: "user_id" is required. "department_id" is required. "salary" is required
+2026-06-10 15:36:04 [error]: ValidationError: "email" must be a valid email
+2026-06-10 15:53:46 [error]: UnauthorizedError: Access denied — token missing
+    at module.exports (D:\LoginApp\backend\src\middleware\auth.js:8:17)
+    at Layer.handle [as handle_request] (D:\LoginApp\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\LoginApp\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (D:\LoginApp\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (D:\LoginApp\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\LoginApp\backend\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (D:\LoginApp\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\LoginApp\backend\node_modules\express\lib\router\index.js:280:10)
+    at router.handle (D:\LoginApp\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\LoginApp\backend\node_modules\express\lib\router\index.js:47:12)
+2026-06-11 01:34:49 [error]: ValidationError: "to_date" must be greater than or equal to "from_date"
+2026-06-11 01:34:50 [error]: ValidationError: "user_id" is required. "department_id" is required. "salary" is required
+2026-06-11 01:34:50 [error]: ValidationError: "email" must be a valid email
+2026-06-11 10:21:06 [error]: ValidationError: "to_date" must be greater than or equal to "from_date"
+2026-06-11 10:21:06 [error]: ValidationError: "email" must be a valid email
+2026-06-11 10:21:07 [error]: ValidationError: "user_id" is required. "department_id" is required. "salary" is required

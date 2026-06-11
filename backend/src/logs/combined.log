@@ -206,3 +206,323 @@
 2026-06-09 13:00:02 [info]: 🚀 PeopleDesk ERP server running on port 5000
 2026-06-09 13:00:28 [info]: GET /api/notifications
 2026-06-09 13:00:58 [info]: GET /api/notifications
+2026-06-09 13:01:28 [info]: GET /api/notifications
+2026-06-09 13:01:58 [info]: GET /api/notifications
+2026-06-09 13:03:00 [info]: GET /api/notifications
+2026-06-09 13:04:00 [info]: GET /api/notifications
+2026-06-09 13:04:28 [info]: GET /api/notifications
+2026-06-09 13:04:58 [info]: GET /api/notifications
+2026-06-09 13:05:06 [info]: GET /api/notifications
+2026-06-09 13:05:06 [info]: GET /api/audit-logs?page=1&limit=20
+2026-06-09 13:05:10 [info]: GET /api/notifications
+2026-06-09 13:05:14 [info]: GET /api/dashboard/reports/assets
+2026-06-09 13:05:40 [info]: GET /api/notifications
+2026-06-09 13:32:05 [info]: 🚀 PeopleDesk ERP server running on port 5000
+2026-06-09 17:22:40 [info]: 🚀 PeopleDesk ERP server running on port 5000
+2026-06-09 17:23:09 [info]: POST /api/auth/login
+2026-06-09 17:23:09 [info]: GET /api/user/profile
+2026-06-09 17:23:09 [info]: GET /api/notifications
+2026-06-09 17:23:09 [info]: GET /api/dashboard/stats
+2026-06-09 17:23:18 [info]: PUT /api/notifications/read-all
+2026-06-09 17:23:18 [info]: GET /api/notifications
+2026-06-09 17:23:39 [info]: GET /api/notifications
+2026-06-09 17:24:09 [info]: GET /api/notifications
+2026-06-09 17:24:39 [info]: GET /api/notifications
+2026-06-09 17:25:09 [info]: GET /api/notifications
+2026-06-09 17:25:39 [info]: GET /api/notifications
+2026-06-09 17:26:09 [info]: GET /api/notifications
+2026-06-09 17:26:39 [info]: GET /api/notifications
+2026-06-09 17:27:24 [info]: GET /api/notifications
+2026-06-09 17:28:24 [info]: GET /api/notifications
+2026-06-09 17:28:57 [info]: GET /api/notifications
+2026-06-09 17:29:09 [info]: GET /api/notifications
+2026-06-09 17:29:39 [info]: GET /api/notifications
+2026-06-09 17:30:09 [info]: GET /api/notifications
+2026-06-09 17:31:10 [info]: GET /api/notifications
+2026-06-09 17:31:52 [info]: GET /api/notifications
+2026-06-09 17:32:01 [info]: 🚀 PeopleDesk ERP server running on port 5000
+2026-06-10 15:32:44 [info]: Starting database migration process...
+2026-06-10 15:32:44 [info]: Executing Migration V1 (Enterprise Schema tables & views)...
+2026-06-10 15:32:44 [info]: Migration V1 completed successfully.
+2026-06-10 15:32:44 [info]: Executing Migration V2 (Enterprise Dashboard Views & Indexes)...
+2026-06-10 15:32:44 [info]: Migration V2 completed successfully.
+2026-06-10 15:33:31 [info]: ⏰ Background cron jobs successfully initialized
+2026-06-10 15:33:32 [info]: 🚀 PeopleDesk ERP server running in [test] mode on port 5000
+2026-06-10 15:33:32 [info]: POST /api/v1/leave/apply
+2026-06-10 15:33:32 [info]: POST /api/v1/leave/apply
+2026-06-10 15:33:32 [error]: ValidationError: "to_date" must be greater than or equal to "from_date"
+2026-06-10 15:33:32 [info]: POST /api/v1/leave/100/approve
+2026-06-10 15:33:32 [info]: ⏰ Background cron jobs successfully initialized
+2026-06-10 15:33:33 [info]: GET /api/v1/employees?page=1&limit=20
+2026-06-10 15:33:33 [info]: POST /api/v1/employees
+2026-06-10 15:33:33 [error]: ValidationError: "user_id" is required. "department_id" is required. "salary" is required
+2026-06-10 15:33:33 [info]: POST /api/v1/employees
+2026-06-10 15:33:33 [info]: ⏰ Background cron jobs successfully initialized
+2026-06-10 15:33:33 [info]: POST /api/v1/auth/login
+2026-06-10 15:33:33 [info]: POST /api/v1/auth/login
+2026-06-10 15:33:33 [error]: ValidationError: "email" must be a valid email
+2026-06-10 15:33:33 [info]: POST /api/v1/auth/signup
+2026-06-10 15:33:52 [info]: ⏰ Background cron jobs successfully initialized
+2026-06-10 15:33:52 [info]: GET /api/v1/employees?page=1&limit=20
+2026-06-10 15:33:52 [info]: POST /api/v1/employees
+2026-06-10 15:33:52 [error]: ValidationError: "user_id" is required. "department_id" is required. "salary" is required
+2026-06-10 15:33:52 [info]: POST /api/v1/employees
+2026-06-10 15:33:52 [info]: ⏰ Background cron jobs successfully initialized
+2026-06-10 15:33:53 [info]: POST /api/v1/auth/login
+2026-06-10 15:33:53 [info]: POST /api/v1/auth/login
+2026-06-10 15:33:53 [error]: ValidationError: "email" must be a valid email
+2026-06-10 15:33:53 [info]: POST /api/v1/auth/signup
+2026-06-10 15:33:53 [info]: ⏰ Background cron jobs successfully initialized
+2026-06-10 15:33:53 [info]: POST /api/v1/leave/apply
+2026-06-10 15:33:53 [info]: POST /api/v1/leave/apply
+2026-06-10 15:33:53 [error]: ValidationError: "to_date" must be greater than or equal to "from_date"
+2026-06-10 15:33:53 [info]: POST /api/v1/leave/100/approve
+2026-06-10 15:34:05 [info]: GET /api/v1/employees?page=1&limit=20
+2026-06-10 15:34:05 [info]: POST /api/v1/employees
+2026-06-10 15:34:05 [error]: ValidationError: "user_id" is required. "department_id" is required. "salary" is required
+2026-06-10 15:34:05 [info]: POST /api/v1/employees
+2026-06-10 15:34:06 [info]: POST /api/v1/auth/login
+2026-06-10 15:34:06 [info]: POST /api/v1/auth/login
+2026-06-10 15:34:06 [error]: ValidationError: "email" must be a valid email
+2026-06-10 15:34:06 [info]: POST /api/v1/auth/signup
+2026-06-10 15:34:06 [info]: POST /api/v1/leave/apply
+2026-06-10 15:34:06 [info]: POST /api/v1/leave/apply
+2026-06-10 15:34:06 [error]: ValidationError: "to_date" must be greater than or equal to "from_date"
+2026-06-10 15:34:06 [info]: POST /api/v1/leave/100/approve
+2026-06-10 15:36:04 [info]: POST /api/v1/leave/apply
+2026-06-10 15:36:04 [info]: POST /api/v1/leave/apply
+2026-06-10 15:36:04 [error]: ValidationError: "to_date" must be greater than or equal to "from_date"
+2026-06-10 15:36:04 [info]: POST /api/v1/leave/100/approve
+2026-06-10 15:36:04 [info]: GET /api/v1/employees?page=1&limit=20
+2026-06-10 15:36:04 [info]: POST /api/v1/employees
+2026-06-10 15:36:04 [error]: ValidationError: "user_id" is required. "department_id" is required. "salary" is required
+2026-06-10 15:36:04 [info]: POST /api/v1/employees
+2026-06-10 15:36:04 [info]: POST /api/v1/auth/login
+2026-06-10 15:36:04 [info]: POST /api/v1/auth/login
+2026-06-10 15:36:04 [error]: ValidationError: "email" must be a valid email
+2026-06-10 15:36:04 [info]: POST /api/v1/auth/signup
+2026-06-10 15:46:10 [info]: Starting database migration process...
+2026-06-10 15:46:10 [info]: Executing Migration V1 (Enterprise Schema tables & views)...
+2026-06-10 15:46:10 [info]: Migration V1 completed successfully.
+2026-06-10 15:46:10 [info]: Executing Migration V2 (Enterprise Dashboard Views & Indexes)...
+2026-06-10 15:46:10 [info]: Migration V2 completed successfully.
+2026-06-10 15:49:44 [info]: ⏰ Background cron jobs successfully initialized
+2026-06-10 15:49:44 [info]: 🚀 PeopleDesk ERP server running in [development] mode on port 5000
+2026-06-10 15:50:28 [info]: POST /api/auth/login
+2026-06-10 15:50:28 [info]: Login attempted: User "raunakshr22@gmail.com" -> SUCCESS (IP: ::1) | Details: {}
+2026-06-10 15:50:29 [info]: GET /api/user/profile
+2026-06-10 15:50:29 [info]: GET /api/notifications
+2026-06-10 15:50:29 [info]: GET /api/dashboard/stats
+2026-06-10 15:50:59 [info]: GET /api/notifications
+2026-06-10 15:51:29 [info]: GET /api/notifications
+2026-06-10 15:51:59 [info]: GET /api/notifications
+2026-06-10 15:52:04 [info]: GET /api/health/
+2026-06-10 15:52:04 [info]: GET /favicon.ico
+2026-06-10 15:52:36 [info]: GET /api/health/details/
+2026-06-10 15:53:46 [info]: GET /api/v2/employees?page=1&limit=5
+2026-06-10 15:53:46 [error]: UnauthorizedError: Access denied — token missing
+    at module.exports (D:\LoginApp\backend\src\middleware\auth.js:8:17)
+    at Layer.handle [as handle_request] (D:\LoginApp\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\LoginApp\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (D:\LoginApp\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (D:\LoginApp\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\LoginApp\backend\node_modules\express\lib\router\index.js:284:15
+    at router.process_params (D:\LoginApp\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\LoginApp\backend\node_modules\express\lib\router\index.js:280:10)
+    at router.handle (D:\LoginApp\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\LoginApp\backend\node_modules\express\lib\router\index.js:47:12)
+2026-06-10 15:59:06 [info]: ⏰ Background cron jobs successfully initialized
+2026-06-10 15:59:06 [info]: 🚀 PeopleDesk ERP server running in [development] mode on port 5000
+2026-06-11 01:26:15 [info]: ⏰ Background cron jobs successfully initialized
+2026-06-11 01:26:15 [info]: 🚀 PeopleDesk ERP server running in [development] mode on port 5000
+2026-06-11 01:26:50 [info]: POST /api/auth/login
+2026-06-11 01:26:52 [info]: Login attempted: User "raunakshr22@gmail.com" -> SUCCESS (IP: ::1) | Details: {}
+2026-06-11 01:26:52 [info]: GET /api/user/profile
+2026-06-11 01:26:52 [info]: GET /api/notifications
+2026-06-11 01:26:52 [info]: GET /api/dashboard/stats
+2026-06-11 01:27:13 [info]: GET /api/notifications
+2026-06-11 01:27:15 [info]: GET /api/notifications
+2026-06-11 01:27:15 [info]: GET /api/employees
+2026-06-11 01:27:21 [info]: GET /api/notifications
+2026-06-11 01:27:21 [info]: GET /api/employees
+2026-06-11 01:27:31 [info]: ⏰ Background cron jobs successfully initialized
+2026-06-11 01:27:32 [info]: 🚀 PeopleDesk ERP server running in [development] mode on port 5000
+2026-06-11 01:29:03 [info]: ⏰ Background cron jobs successfully initialized
+2026-06-11 01:29:03 [info]: 🚀 PeopleDesk ERP server running in [development] mode on port 5000
+2026-06-11 01:29:43 [info]: POST /api/auth/login
+2026-06-11 01:29:43 [info]: Login attempted: User "raunakshr22@gmail.com" -> SUCCESS (IP: ::1) | Details: {}
+2026-06-11 01:29:43 [info]: GET /api/user/profile
+2026-06-11 01:29:43 [info]: GET /api/notifications
+2026-06-11 01:29:43 [info]: GET /api/dashboard/stats
+2026-06-11 01:29:46 [info]: GET /api/notifications
+2026-06-11 01:29:49 [info]: GET /api/search?q=An
+2026-06-11 01:29:50 [info]: GET /api/search?q=Anay
+2026-06-11 01:29:52 [info]: GET /api/notifications
+2026-06-11 01:29:52 [info]: GET /api/employees
+2026-06-11 01:30:06 [info]: GET /api/notifications
+2026-06-11 01:30:06 [info]: GET /api/dashboard/stats
+2026-06-11 01:30:13 [info]: GET /api/notifications
+2026-06-11 01:30:13 [info]: GET /api/departments
+2026-06-11 01:30:13 [info]: Cache MISS for key: "departments"
+2026-06-11 01:30:13 [info]: Cache SET for key: "departments" with TTL: 3600s
+2026-06-11 01:30:17 [info]: GET /api/notifications
+2026-06-11 01:30:17 [info]: GET /api/skills
+2026-06-11 01:30:17 [info]: Cache MISS for key: "skills"
+2026-06-11 01:30:17 [info]: Cache SET for key: "skills" with TTL: 3600s
+2026-06-11 01:30:19 [info]: GET /api/notifications
+2026-06-11 01:30:19 [info]: GET /api/leave/my
+2026-06-11 01:30:20 [info]: GET /api/notifications
+2026-06-11 01:30:20 [info]: GET /api/leave/pending
+2026-06-11 01:30:22 [info]: GET /api/notifications
+2026-06-11 01:30:22 [info]: GET /api/assets/types
+2026-06-11 01:30:22 [info]: GET /api/assets?page=1&limit=10&sortBy=id&sortOrder=DESC
+2026-06-11 01:30:23 [info]: GET /api/notifications
+2026-06-11 01:30:23 [info]: GET /api/notifications
+2026-06-11 01:30:25 [info]: GET /api/notifications
+2026-06-11 01:30:25 [info]: GET /api/audit-logs?page=1&limit=20
+2026-06-11 01:30:26 [info]: GET /api/notifications
+2026-06-11 01:30:31 [info]: GET /api/notifications
+2026-06-11 01:30:31 [info]: GET /api/employees
+2026-06-11 01:33:37 [info]: GET /api/notifications
+2026-06-11 01:33:37 [info]: GET /api/employees
+2026-06-11 01:33:50 [info]: POST /api/auth/login
+2026-06-11 01:33:50 [info]: Login attempted: User "anay@gmail.com" -> SUCCESS (IP: ::1) | Details: {}
+2026-06-11 01:33:50 [info]: GET /api/user/profile
+2026-06-11 01:33:50 [info]: GET /api/notifications
+2026-06-11 01:33:50 [info]: GET /api/dashboard/stats
+2026-06-11 01:33:58 [info]: GET /api/notifications
+2026-06-11 01:33:59 [info]: GET /api/notifications
+2026-06-11 01:34:00 [info]: GET /api/leave/types
+2026-06-11 01:34:00 [info]: GET /api/notifications
+2026-06-11 01:34:00 [info]: GET /api/leave/my
+2026-06-11 01:34:01 [info]: GET /api/notifications
+2026-06-11 01:34:01 [info]: GET /api/assets/types
+2026-06-11 01:34:01 [info]: GET /api/assets?page=1&limit=10&sortBy=id&sortOrder=DESC
+2026-06-11 01:34:07 [info]: PUT /api/notifications/read-all
+2026-06-11 01:34:07 [info]: GET /api/notifications
+2026-06-11 01:34:31 [info]: GET /api/notifications
+2026-06-11 01:34:49 [info]: POST /api/v1/leave/apply
+2026-06-11 01:34:49 [info]: POST /api/v1/leave/apply
+2026-06-11 01:34:49 [error]: ValidationError: "to_date" must be greater than or equal to "from_date"
+2026-06-11 01:34:49 [info]: POST /api/v1/leave/100/approve
+2026-06-11 01:34:50 [info]: POST /api/auth/login
+2026-06-11 01:34:50 [info]: GET /api/v1/employees?page=1&limit=20
+2026-06-11 01:34:50 [info]: POST /api/v1/employees
+2026-06-11 01:34:50 [error]: ValidationError: "user_id" is required. "department_id" is required. "salary" is required
+2026-06-11 01:34:50 [info]: POST /api/v1/employees
+2026-06-11 01:34:50 [info]: Login attempted: User "raunakshr22@gmail.com" -> SUCCESS (IP: ::1) | Details: {}
+2026-06-11 01:34:50 [info]: GET /api/user/profile
+2026-06-11 01:34:50 [info]: GET /api/notifications
+2026-06-11 01:34:50 [info]: GET /api/dashboard/stats
+2026-06-11 01:34:50 [info]: POST /api/v1/auth/login
+2026-06-11 01:34:50 [info]: POST /api/v1/auth/login
+2026-06-11 01:34:50 [error]: ValidationError: "email" must be a valid email
+2026-06-11 01:34:50 [info]: POST /api/v1/auth/signup
+2026-06-11 01:34:53 [info]: GET /api/notifications
+2026-06-11 01:34:53 [info]: GET /api/employees?page=1&limit=10
+2026-06-11 01:35:09 [info]: GET /api/notifications
+2026-06-11 01:35:09 [info]: GET /api/employees
+2026-06-11 01:35:43 [info]: POST /api/auth/login
+2026-06-11 01:35:43 [info]: Login attempted: User "raunakshr22@gmail.com" -> SUCCESS (IP: ::1) | Details: {}
+2026-06-11 01:35:43 [info]: GET /api/user/profile
+2026-06-11 01:35:43 [info]: GET /api/dashboard/stats
+2026-06-11 01:35:43 [info]: GET /api/notifications
+2026-06-11 01:35:45 [info]: GET /api/notifications
+2026-06-11 01:35:45 [info]: GET /api/employees
+2026-06-11 01:36:47 [info]: GET /api/notifications
+2026-06-11 01:36:47 [info]: GET /api/employees
+2026-06-11 01:36:48 [info]: GET /api/notifications
+2026-06-11 01:36:48 [info]: GET /api/employees
+2026-06-11 01:37:18 [info]: POST /api/auth/login
+2026-06-11 01:37:18 [info]: Login attempted: User "raunakshr22@gmail.com" -> SUCCESS (IP: ::1) | Details: {}
+2026-06-11 01:37:18 [info]: GET /api/user/profile
+2026-06-11 01:37:18 [info]: GET /api/notifications
+2026-06-11 01:37:18 [info]: GET /api/dashboard/stats
+2026-06-11 01:37:20 [info]: GET /api/notifications
+2026-06-11 01:37:20 [info]: GET /api/employees
+2026-06-11 01:38:44 [info]: GET /api/notifications
+2026-06-11 01:38:44 [info]: GET /api/employees?page=1&limit=10
+2026-06-11 01:39:15 [info]: GET /api/notifications
+2026-06-11 01:39:45 [info]: GET /api/notifications
+2026-06-11 01:40:15 [info]: GET /api/notifications
+2026-06-11 01:40:22 [info]: GET /api/notifications
+2026-06-11 01:40:22 [info]: GET /api/employees?page=1&limit=10
+2026-06-11 01:40:52 [info]: GET /api/notifications
+2026-06-11 01:41:22 [info]: GET /api/notifications
+2026-06-11 01:41:24 [info]: ⏰ Background cron jobs successfully initialized
+2026-06-11 01:41:25 [info]: 🚀 PeopleDesk ERP server running in [development] mode on port 5000
+2026-06-11 10:21:06 [info]: POST /api/v1/leave/apply
+2026-06-11 10:21:06 [info]: POST /api/v1/leave/apply
+2026-06-11 10:21:06 [error]: ValidationError: "to_date" must be greater than or equal to "from_date"
+2026-06-11 10:21:06 [info]: POST /api/v1/leave/100/approve
+2026-06-11 10:21:06 [info]: POST /api/v1/auth/login
+2026-06-11 10:21:06 [info]: POST /api/v1/auth/login
+2026-06-11 10:21:06 [error]: ValidationError: "email" must be a valid email
+2026-06-11 10:21:06 [info]: POST /api/v1/auth/signup
+2026-06-11 10:21:06 [info]: GET /api/v1/employees?page=1&limit=20
+2026-06-11 10:21:07 [info]: POST /api/v1/employees
+2026-06-11 10:21:07 [error]: ValidationError: "user_id" is required. "department_id" is required. "salary" is required
+2026-06-11 10:21:07 [info]: POST /api/v1/employees
+2026-06-11 10:21:33 [info]: [MOCK EMAIL SENT] To: test-recipient@example.com | Subject: Welcome to PeopleDesk ERP! 🚀
+2026-06-11 10:21:33 [info]: Mock Email Details: "{\"from\":{\"address\":\"noreply@peopledesk.com\",\"name\":\"PeopleDesk ERP\"},\"to\":[{\"address\":\"test-recipient@example.com\",\"name\":\"\"}],\"subject\":\"Welcome to PeopleDesk ERP! 🚀\",\"text\":\"Welcome, Alice Tester! Your employee account has been created successfully. Best regards, HR Operations Team\",\"html\":\"<h1>Welcome, Alice Tester!</h1>\\n             <p>Your employee account has been created successfully.</p>\\n             <p>You can now log in to the portal and view your dashboard, leaves, and assets.</p>\\n             <br/>\\n             <p>Best regards,</p>\\n             <p>HR Operations Team</p>\",\"headers\":{},\"messageId\":\"<39e7fccf-bd32-971a-47d6-a256c7a13af8@peopledesk.com>\"}"
+2026-06-11 10:21:33 [info]: [MOCK EMAIL SENT] To: test-recipient@example.com | Subject: Leave Request APPROVED - PeopleDesk ERP
+2026-06-11 10:21:33 [info]: Mock Email Details: "{\"from\":{\"address\":\"noreply@peopledesk.com\",\"name\":\"PeopleDesk ERP\"},\"to\":[{\"address\":\"test-recipient@example.com\",\"name\":\"\"}],\"subject\":\"Leave Request APPROVED - PeopleDesk ERP\",\"text\":\"Hello Alice Tester, Your request for Annual Leave from 2026-06-15 to 2026-06-17 has been approved. Remarks: Approved by HR - Enjoy your vacation!\",\"html\":\"<h1>Leave Request Update</h1>\\n             <p>Hello Alice Tester,</p>\\n             <p>Your request for <strong>Annual Leave</strong> from 2026-06-15 to 2026-06-17 has been <strong>approved</strong>.</p>\\n             <p><strong>Remarks:</strong> Approved by HR - Enjoy your vacation!</p>\\n             <br/>\\n             <p>Best regards,</p>\\n             <p>Operations Portal</p>\",\"headers\":{},\"messageId\":\"<2e112ede-7087-2f1c-f151-5eabab6fabf6@peopledesk.com>\"}"
+2026-06-11 10:21:33 [info]: [MOCK EMAIL SENT] To: test-recipient@example.com | Subject: Asset Assigned - PeopleDesk ERP
+2026-06-11 10:21:33 [info]: Mock Email Details: "{\"from\":{\"address\":\"noreply@peopledesk.com\",\"name\":\"PeopleDesk ERP\"},\"to\":[{\"address\":\"test-recipient@example.com\",\"name\":\"\"}],\"subject\":\"Asset Assigned - PeopleDesk ERP\",\"text\":\"Hello Alice Tester, The asset Developer MacBook Pro 16 (DEV-MBP-042) has been successfully allocated to you. Best regards, IT Inventory Team\",\"html\":\"<h1>Asset Assignment Update</h1>\\n             <p>Hello Alice Tester,</p>\\n             <p>The asset <strong>Developer MacBook Pro 16</strong> (DEV-MBP-042) has been successfully <strong>allocated to</strong> you.</p>\\n             <br/>\\n             <p>Best regards,</p>\\n             <p>IT Inventory Team</p>\",\"headers\":{},\"messageId\":\"<8b696267-a24f-2f84-7da2-e520194414f0@peopledesk.com>\"}"
+2026-06-11 10:38:57 [info]: ⏰ Background cron jobs successfully initialized
+2026-06-11 10:38:58 [info]: 🚀 PeopleDesk ERP server running in [development] mode on port 5000
+2026-06-11 10:39:46 [info]: POST /api/auth/login
+2026-06-11 10:39:46 [info]: Login attempted: User "raunakshr22@gmail.com" -> SUCCESS (IP: ::1) | Details: {}
+2026-06-11 10:39:46 [info]: GET /api/user/profile
+2026-06-11 10:39:47 [info]: GET /api/notifications
+2026-06-11 10:39:47 [info]: GET /api/dashboard/stats
+2026-06-11 10:39:56 [info]: GET /api/notifications
+2026-06-11 10:40:11 [info]: GET /api/notifications
+2026-06-11 10:40:11 [info]: GET /api/assets/types
+2026-06-11 10:40:11 [info]: GET /api/assets?page=1&limit=10&sortBy=id&sortOrder=DESC
+2026-06-11 10:40:13 [info]: GET /api/notifications
+2026-06-11 10:40:13 [info]: GET /api/employees?limit=1000
+2026-06-11 10:40:13 [info]: GET /api/assets/1
+2026-06-11 10:40:22 [info]: POST /api/assets/1/allocate
+2026-06-11 10:40:22 [info]: [MOCK EMAIL SENT] To: raunakshr22@gmail.com | Subject: Asset Assigned - PeopleDesk ERP
+2026-06-11 10:40:22 [info]: Mock Email Details: "{\"from\":{\"address\":\"noreply@peopledesk.com\",\"name\":\"PeopleDesk ERP\"},\"to\":[{\"address\":\"raunakshr22@gmail.com\",\"name\":\"\"}],\"subject\":\"Asset Assigned - PeopleDesk ERP\",\"text\":\"Hello Raunak Jangid, The asset Dell Latitude 5420 (AST-001) has been successfully allocated to you. Best regards, IT Inventory Team\",\"html\":\"<h1>Asset Assignment Update</h1>\\n             <p>Hello Raunak Jangid,</p>\\n             <p>The asset <strong>Dell Latitude 5420</strong> (AST-001) has been successfully <strong>allocated to</strong> you.</p>\\n             <br/>\\n             <p>Best regards,</p>\\n             <p>IT Inventory Team</p>\",\"headers\":{},\"messageId\":\"<b14283e9-7cd0-7e33-15b4-1bfc2bf8bd50@peopledesk.com>\"}"
+2026-06-11 10:40:23 [info]: GET /api/notifications
+2026-06-11 10:40:23 [info]: GET /api/assets/types
+2026-06-11 10:40:23 [info]: GET /api/assets?page=1&limit=10&sortBy=id&sortOrder=DESC
+2026-06-11 10:40:54 [info]: GET /api/notifications
+2026-06-11 10:41:24 [info]: GET /api/notifications
+2026-06-11 10:41:54 [info]: GET /api/notifications
+2026-06-11 10:42:24 [info]: GET /api/notifications
+2026-06-11 10:42:54 [info]: GET /api/notifications
+2026-06-11 10:43:24 [info]: GET /api/notifications
+2026-06-11 10:43:54 [info]: GET /api/notifications
+2026-06-11 10:44:51 [info]: GET /api/notifications
+2026-06-11 10:45:51 [info]: GET /api/notifications
+2026-06-11 10:46:51 [info]: GET /api/notifications
+2026-06-11 10:47:01 [info]: GET /api/notifications
+2026-06-11 11:25:45 [info]: GET /api/notifications
+2026-06-11 14:48:06 [info]: GET /api/notifications
+2026-06-11 14:48:34 [info]: ⏰ Background cron jobs successfully initialized
+2026-06-11 14:48:34 [info]: 🚀 PeopleDesk ERP server running in [development] mode on port 5000
+2026-06-11 14:48:38 [info]: GET /api/notifications
+2026-06-11 16:13:17 [info]: ⏰ Background cron jobs successfully initialized
+2026-06-11 16:13:17 [info]: 🚀 PeopleDesk ERP server running in [development] mode on port 5000
+2026-06-11 16:13:36 [info]: POST /api/auth/login
+2026-06-11 16:13:36 [info]: Login attempted: User "raunakshr22@gmail.com" -> SUCCESS (IP: ::1) | Details: {}
+2026-06-11 16:13:36 [info]: GET /api/user/profile
+2026-06-11 16:13:36 [info]: GET /api/notifications
+2026-06-11 16:13:36 [info]: GET /api/dashboard/stats
+2026-06-11 16:13:40 [info]: PUT /api/notifications/4/read
+2026-06-11 16:13:40 [info]: GET /api/notifications
+2026-06-11 16:13:43 [info]: GET /api/notifications
+2026-06-11 16:13:43 [info]: GET /api/assets/types
+2026-06-11 16:13:43 [info]: GET /api/assets?page=1&limit=10&sortBy=id&sortOrder=DESC
+2026-06-11 16:13:46 [info]: POST /api/assets/1/return
+2026-06-11 16:13:47 [info]: GET /api/assets?page=1&limit=10&sortBy=id&sortOrder=DESC
+2026-06-11 16:13:51 [info]: [EMAIL SENT] To: raunakshr22@gmail.com | MessageId: <4a07c1bd-fec1-d444-1d7b-f82daf1c4303@peopledesk.com>
+2026-06-11 16:14:14 [info]: GET /api/notifications
+2026-06-11 16:14:44 [info]: GET /api/notifications
+2026-06-11 16:14:52 [info]: ⏰ Background cron jobs successfully initialized
+2026-06-11 16:14:52 [info]: 🚀 PeopleDesk ERP server running in [development] mode on port 5000
+2026-06-11 16:15:14 [info]: GET /api/notifications
+2026-06-11 16:15:44 [info]: GET /api/notifications

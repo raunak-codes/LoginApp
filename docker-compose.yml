@@ -1,0 +1,55 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: peopledesk-postgres
+    environment:
+      POSTGRES_DB: loginapp
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: yourpassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d loginapp"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: peopledesk-backend
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+      - DB_USER=postgres
+      - DB_HOST=db
+      - DB_NAME=loginapp
+      - DB_PASSWORD=yourpassword
+      - DB_PORT=5432
+      - JWT_SECRET=production_secret_key_peopledesk_erp_2026
+    ports:
+      - "5000:5000"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - backend_uploads:/usr/src/app/uploads
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: peopledesk-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
+  backend_uploads:

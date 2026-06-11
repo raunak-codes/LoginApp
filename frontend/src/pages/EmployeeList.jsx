@@ -14,25 +14,42 @@ function EmployeeList() {
   const { token } = useAuth();
   const navigate = useNavigate();
   const [employees, setEmployees] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
+  const limit = 10;
 
-  useEffect(() => {
+  const fetchEmployees = () => {
+    setLoading(true);
     axios
-      .get(`${API}/api/employees`, {
+      .get(`${API}/api/employees?page=${page}&limit=${limit}`, {
         headers: { Authorization: token },
       })
-      .then((res) => setEmployees(res.data))
+      .then((res) => {
+        setEmployees(res.data.data || []);
+        setTotal(res.data.total || 0);
+      })
       .catch(console.error)
       .finally(() => setLoading(false));
-  }, [token]);
+  };
+
+  useEffect(() => {
+    fetchEmployees();
+  }, [token, page]);
 
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this employee?")) return;
-    await axios.delete(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/employees/${id}`, {
-      headers: { Authorization: token },
-    });
-    setEmployees(employees.filter((e) => e.id !== id));
+    try {
+      await axios.delete(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/employees/${id}`, {
+        headers: { Authorization: token },
+      });
+      fetchEmployees();
+    } catch (err) {
+      alert(err.response?.data?.error || "Failed to delete employee");
+    }
   };
+
+  const totalPages = Math.ceil(total / limit);
 
   const columns = [
     { key: "name",            label: "Name" },
@@ -83,6 +100,28 @@ function EmployeeList() {
           />
         )}
       </Card>
+
+      {totalPages > 1 && (
+        <div className="pagination">
+          <button
+            className="pagination-btn"
+            disabled={page === 1}
+            onClick={() => setPage((p) => p - 1)}
+          >
+            ← Prev
+          </button>
+          <span className="pagination-info">
+            Page {page} of {totalPages} ({total} total)
+          </span>
+          <button
+            className="pagination-btn"
+            disabled={page === totalPages}
+            onClick={() => setPage((p) => p + 1)}
+          >
+            Next →
+          </button>
+        </div>
+      )}
     </Layout>
   );
 }
