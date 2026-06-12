@@ -17,8 +17,7 @@ const authService = {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const validRoles = ["admin", "hr", "manager", "employee", "user"];
-    const assignedRole = validRoles.includes(role) ? role : "user";
+    const assignedRole = "employee";
 
     const newUser = await userRepository.create({
       name,

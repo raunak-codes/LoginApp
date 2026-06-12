@@ -31,10 +31,21 @@ import AssetHistory   from "../pages/AssetHistory";
 import Notifications  from "../pages/Notifications";
 import AuditLogs      from "../pages/AuditLogs";
 import Reports        from "../pages/Reports";
+import UserManagement from "../pages/UserManagement";
 
-function Protected({ children }) {
-  const { token } = useAuth();
-  return token ? children : <Navigate to="/" />;
+// ── Attendance, Payroll, Expenses & Asset Requests ───────────
+import Attendance     from "../pages/Attendance";
+import Payroll        from "../pages/Payroll";
+import Expenses       from "../pages/Expenses";
+import AssetRequests  from "../pages/AssetRequests";
+
+function Protected({ children, roles }) {
+  const { token, user } = useAuth();
+  if (!token) return <Navigate to="/" />;
+  if (roles && user && !roles.includes(user.role)) {
+    return <Navigate to="/attendance" />;
+  }
+  return children;
 }
 
 function AppRoutes() {
@@ -46,7 +57,7 @@ function AppRoutes() {
         <Route path="/signup" element={<Signup />} />
 
         {/* Core */}
-        <Route path="/dashboard" element={<Protected><Dashboard /></Protected>} />
+        <Route path="/dashboard" element={<Protected roles={["admin", "hr", "manager"]}><Dashboard /></Protected>} />
         <Route path="/search"    element={<Protected><Search /></Protected>} />
 
         {/* Employees */}
@@ -70,7 +81,14 @@ function AppRoutes() {
         {/* Notifications, Audit, Reports */}
         <Route path="/notifications" element={<Protected><Notifications /></Protected>} />
         <Route path="/audit-logs"    element={<Protected><AuditLogs /></Protected>} />
+        <Route path="/admin/users"   element={<Protected roles={["admin"]}><UserManagement /></Protected>} />
         <Route path="/reports"       element={<Protected><Reports /></Protected>} />
+
+        {/* Core HR Extensions */}
+        <Route path="/attendance"    element={<Protected><Attendance /></Protected>} />
+        <Route path="/payroll"       element={<Protected><Payroll /></Protected>} />
+        <Route path="/expenses"      element={<Protected><Expenses /></Protected>} />
+        <Route path="/assets/requests" element={<Protected><AssetRequests /></Protected>} />
       </Routes>
     </BrowserRouter>
   );

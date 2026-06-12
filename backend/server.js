@@ -25,6 +25,9 @@ const notificationRoutes = require("./src/routes/notifications");
 const auditLogRoutes = require("./src/routes/auditLogs");
 const searchRoutes = require("./src/routes/search");
 const dashboardRoutes = require("./src/routes/dashboard");
+const attendanceRoutes = require("./src/routes/attendance");
+const payrollRoutes = require("./src/routes/payroll");
+const expenseRoutes = require("./src/routes/expenses");
 
 // ── V2 API Routes ───────────────────────────────────────────
 const employeeV2Routes = require("./src/routes/v2/employees");
@@ -59,6 +62,9 @@ app.use("/api/v1/notifications", notificationRoutes);
 app.use("/api/v1/audit-logs", auditLogRoutes);
 app.use("/api/v1/search", searchRoutes);
 app.use("/api/v1/dashboard", dashboardRoutes);
+app.use("/api/v1/attendance", attendanceRoutes);
+app.use("/api/v1/payroll", payrollRoutes);
+app.use("/api/v1/expenses", expenseRoutes);
 
 // ── API Version 2 Routes ────────────────────────────────────
 app.use("/api/v2/employees", employeeV2Routes);
@@ -78,6 +84,9 @@ app.use("/api/notifications", notificationRoutes);
 app.use("/api/audit-logs", auditLogRoutes);
 app.use("/api/search", searchRoutes);
 app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/attendance", attendanceRoutes);
+app.use("/api/payroll", payrollRoutes);
+app.use("/api/expenses", expenseRoutes);
 
 // ── Centralized Error Handler (must be last) ─────────────────
 app.use(errorHandler);

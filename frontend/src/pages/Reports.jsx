@@ -35,6 +35,24 @@ const REPORTS = [
     filename: "Asset_Report",
     columns: ["asset_code", "asset_name", "asset_type", "purchase_date", "purchase_cost", "status", "assigned_to"],
   },
+  {
+    id: "payroll",
+    label: "Payroll Ledger",
+    icon: "💵",
+    description: "Detailed breakdown of employee gross earnings, deductions (PF, TDS, PT), net take-home pay, and total CTC.",
+    endpoint: "/api/dashboard/reports/payroll",
+    filename: "Payroll_Ledger",
+    columns: ["employee_name", "email", "department_name", "designation", "basic", "hra", "lta", "allowances", "gross_salary", "pf", "tds", "pt", "net_salary", "ctc"],
+  },
+  {
+    id: "attendance",
+    label: "Attendance Summary Report",
+    icon: "⏱️",
+    description: "Monthly timekeeping audit detailing employee days present, late arrivals, absences, and average daily work hours.",
+    endpoint: "/api/dashboard/reports/attendance",
+    filename: "Attendance_Summary_Report",
+    columns: ["employee_name", "email", "department_name", "total_days", "present_on_time", "present_late", "absent", "avg_hours"],
+  },
 ];
 
 function Reports() {
@@ -49,17 +67,24 @@ function Reports() {
       });
 
       if (format === "csv" || format === "excel") {
-        const ws = XLSX.utils.json_to_sheet(data);
+        // Map data to ensure exact column ordering and human-readable headers
+        const formattedData = data.map((item) => {
+          const row = {};
+          report.columns.forEach((col) => {
+            const header = col.replace(/_/g, " ").toUpperCase();
+            row[header] = item[col] ?? "";
+          });
+          return row;
+        });
+
+        const ws = XLSX.utils.json_to_sheet(formattedData);
         const wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, report.label);
         const ext = format === "csv" ? "csv" : "xlsx";
-        const type = format === "csv" ? "text/csv;charset=utf-8;" : "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
         XLSX.writeFile(wb, `${report.filename}_${new Date().toISOString().slice(0, 10)}.${ext}`);
       } else if (format === "pdf") {
         // Print preview with print CSS
         const cols = report.columns;
-        const rows = data.map((row) => cols.map((c) => row[c] ?? "").join("\t")).join("\n");
-        const header = cols.join("\t");
         const printWin = window.open("", "_blank");
         printWin.document.write(`
           <html><head><title>${report.label}</title>

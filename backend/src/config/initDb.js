@@ -10,6 +10,7 @@ async function runMigration() {
     // 1. Path to migrations
     const migrateV1Path = path.resolve(__dirname, "../../../database/migrate_enterprise.sql");
     const migrateV2Path = path.resolve(__dirname, "../../../database/migrate_enterprise_v2.sql");
+    const migrateV3Path = path.resolve(__dirname, "../../../database/migrate_enterprise_v3.sql");
 
     // Check files existence
     if (fs.existsSync(migrateV1Path)) {
@@ -28,6 +29,15 @@ async function runMigration() {
       logger.info("Migration V2 completed successfully.");
     } else {
       logger.warn(`Migration V2 SQL file not found at ${migrateV2Path}`);
+    }
+
+    if (fs.existsSync(migrateV3Path)) {
+      logger.info("Executing Migration V3 (Attendance, Payroll & Asset Requests)...");
+      const sqlV3 = fs.readFileSync(migrateV3Path, "utf8");
+      await pool.query(sqlV3);
+      logger.info("Migration V3 completed successfully.");
+    } else {
+      logger.warn(`Migration V3 SQL file not found at ${migrateV3Path}`);
     }
 
     logger.info("Database migration completed.");

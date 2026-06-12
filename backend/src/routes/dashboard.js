@@ -1,10 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const auth = require("../middleware/auth");
+const authorize = require("../middleware/authorize");
 const pool = require("../config/db");
 
+// Protect all dashboard routes
+router.use(auth);
+router.use(authorize("admin", "hr", "manager"));
+
 // GET /api/dashboard/stats — comprehensive dashboard statistics
-router.get("/stats", auth, async (req, res, next) => {
+router.get("/stats", async (req, res, next) => {
   try {
     const [
       employees,
@@ -16,7 +21,8 @@ router.get("/stats", auth, async (req, res, next) => {
       approvedLeaves,
       deptCount,
       monthlyHiring,
-      assetStatusBreakdown,
+      deptSalary,
+      attendanceStatus,
     ] = await Promise.all([
       pool.query("SELECT COUNT(*) FROM employee_profiles"),
       pool.query("SELECT COUNT(*) FROM departments"),
@@ -36,8 +42,17 @@ router.get("/stats", auth, async (req, res, next) => {
         LIMIT 12
       `),
       pool.query(`
+        SELECT d.department_name,
+               COALESCE(SUM(s.basic + s.hra + s.lta + s.allowances), 0) AS total_salary
+        FROM departments d
+        LEFT JOIN employee_profiles ep ON ep.department_id = d.id
+        LEFT JOIN salaries s ON s.employee_id = ep.user_id
+        GROUP BY d.department_name
+        ORDER BY total_salary DESC
+      `),
+      pool.query(`
         SELECT status, COUNT(*) AS count
-        FROM assets
+        FROM attendance
         GROUP BY status
       `),
     ]);
@@ -52,13 +67,20 @@ router.get("/stats", auth, async (req, res, next) => {
       approved_leaves: parseInt(approvedLeaves.rows[0].count),
       dept_employee_count: deptCount.rows,
       monthly_hiring: monthlyHiring.rows.reverse(),
-      asset_status_breakdown: assetStatusBreakdown.rows,
+      dept_salary_distribution: deptSalary.rows.map(r => ({
+        department_name: r.department_name,
+        total_salary: parseFloat(r.total_salary)
+      })),
+      attendance_status_breakdown: attendanceStatus.rows.map(r => ({
+        status: r.status,
+        count: parseInt(r.count)
+      })),
     });
   } catch (err) { next(err); }
 });
 
 // GET /api/dashboard/reports/employees — all employees for export
-router.get("/reports/employees", auth, async (req, res, next) => {
+router.get("/reports/employees", async (req, res, next) => {
   try {
     const result = await pool.query(`
       SELECT u.name, u.email, u.role, d.department_name, ep.designation, ep.salary, ep.phone, ep.created_at
@@ -72,7 +94,7 @@ router.get("/reports/employees", auth, async (req, res, next) => {
 });
 
 // GET /api/dashboard/reports/leaves — all leaves for export
-router.get("/reports/leaves", auth, async (req, res, next) => {
+router.get("/reports/leaves", async (req, res, next) => {
   try {
     const result = await pool.query(`
       SELECT u.name AS employee_name, lt.leave_name, la.from_date, la.to_date,
@@ -87,7 +109,7 @@ router.get("/reports/leaves", auth, async (req, res, next) => {
 });
 
 // GET /api/dashboard/reports/assets — all assets for export
-router.get("/reports/assets", auth, async (req, res, next) => {
+router.get("/reports/assets", async (req, res, next) => {
   try {
     const result = await pool.query(`
       SELECT a.asset_code, a.asset_name, a.asset_type, a.purchase_date,
@@ -97,6 +119,59 @@ router.get("/reports/assets", auth, async (req, res, next) => {
       LEFT JOIN asset_allocations aa ON aa.asset_id = a.id AND aa.status = 'active'
       LEFT JOIN users u ON aa.employee_id = u.id
       ORDER BY a.id DESC
+    `);
+    res.json(result.rows);
+  } catch (err) { next(err); }
+});
+
+// GET /api/dashboard/reports/payroll — payroll ledger for export
+router.get("/reports/payroll", async (req, res, next) => {
+  try {
+    const result = await pool.query(`
+      SELECT 
+        u.name AS employee_name,
+        u.email,
+        d.department_name,
+        ep.designation,
+        s.basic,
+        s.hra,
+        s.lta,
+        s.allowances,
+        (s.basic + s.hra + s.lta + s.allowances) AS gross_salary,
+        s.pf,
+        s.tds,
+        s.pt,
+        ((s.basic + s.hra + s.lta + s.allowances) - (s.pf + s.tds + s.pt)) AS net_salary,
+        (s.basic + s.hra + s.lta + s.allowances + s.employer_pf + s.gratuity) AS ctc
+      FROM salaries s
+      JOIN users u ON s.employee_id = u.id
+      JOIN employee_profiles ep ON ep.user_id = u.id
+      JOIN departments d ON ep.department_id = d.id
+      ORDER BY u.name ASC
+    `);
+    res.json(result.rows);
+  } catch (err) { next(err); }
+});
+
+// GET /api/dashboard/reports/attendance — attendance summary for export
+router.get("/reports/attendance", async (req, res, next) => {
+  try {
+    const result = await pool.query(`
+      SELECT 
+        u.name AS employee_name,
+        u.email,
+        d.department_name,
+        COUNT(a.id) AS total_days,
+        COUNT(CASE WHEN a.status = 'present' AND a.is_late = FALSE THEN 1 END) AS present_on_time,
+        COUNT(CASE WHEN a.status = 'late' OR a.is_late = TRUE THEN 1 END) AS present_late,
+        COUNT(CASE WHEN a.status = 'absent' THEN 1 END) AS absent,
+        ROUND(AVG(CASE WHEN a.check_out IS NOT NULL THEN EXTRACT(EPOCH FROM (a.check_out - a.check_in))/3600.0 ELSE 0 END)::numeric, 2) AS avg_hours
+      FROM attendance a
+      JOIN users u ON a.employee_id = u.id
+      JOIN employee_profiles ep ON ep.user_id = u.id
+      JOIN departments d ON ep.department_id = d.id
+      GROUP BY u.name, u.email, d.department_name
+      ORDER BY u.name ASC
     `);
     res.json(result.rows);
   } catch (err) { next(err); }

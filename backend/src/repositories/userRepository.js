@@ -23,6 +23,21 @@ const userRepository = {
     );
     return result.rows[0];
   },
+
+  findAll: async () => {
+    const result = await pool.query(
+      "SELECT id, name, email, role, verified FROM users ORDER BY id ASC"
+    );
+    return result.rows;
+  },
+
+  updateRole: async (id, role) => {
+    const result = await pool.query(
+      "UPDATE users SET role = $1 WHERE id = $2 RETURNING id, name, email, role, verified",
+      [role, id]
+    );
+    return result.rows[0];
+  },
 };
 
 module.exports = userRepository;

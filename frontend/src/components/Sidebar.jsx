@@ -1,40 +1,68 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import {
+  LayoutDashboard,
+  Search,
+  Users,
+  Building2,
+  Lightbulb,
+  FileText,
+  Calendar,
+  CheckSquare,
+  Laptop,
+  Bell,
+  History,
+  FileSpreadsheet,
+  LogOut,
+  Clock,
+  CreditCard,
+  Receipt,
+  Briefcase,
+  Shield
+} from "lucide-react";
 import "./Sidebar.css";
 
 const navItems = [
   // ── Core ──
-  { label: "Dashboard",    path: "/dashboard",          icon: "📊", roles: ["admin","hr","manager","user","employee"] },
-  { label: "Search",       path: "/search",             icon: "🔍", roles: ["admin","hr","manager","user","employee"] },
+  { label: "Dashboard",    path: "/dashboard",          icon: LayoutDashboard, roles: ["admin","hr","manager"] },
+  { label: "Search",       path: "/search",             icon: Search,          roles: ["admin","hr","manager","user","employee"] },
 
   // ── Employee Management ──
-  { label: "Employees",    path: "/employees",          icon: "👥", roles: ["admin","hr","manager"] },
-  { label: "Departments",  path: "/departments",        icon: "🏢", roles: ["admin","hr"] },
-  { label: "Skills",       path: "/skills",             icon: "💡", roles: ["admin","hr"] },
+  { label: "Employees",    path: "/employees",          icon: Users,           roles: ["admin","hr","manager"] },
+  { label: "Departments",  path: "/departments",        icon: Building2,       roles: ["admin","hr"] },
+  { label: "Skills",       path: "/skills",             icon: Lightbulb,       roles: ["admin","hr"] },
 
-  // ── Leave Management ──
-  { label: "Apply Leave",  path: "/leave/apply",        icon: "📝", roles: ["user","employee"] },
-  { label: "My Leaves",    path: "/leave/my",           icon: "📅", roles: ["user","employee","admin","hr","manager"] },
-  { label: "Approvals",    path: "/leave/approvals",    icon: "✅", roles: ["admin","hr","manager"] },
+  // ── Leave & Time ──
+  { label: "Apply Leave",  path: "/leave/apply",        icon: FileText,        roles: ["user","employee"] },
+  { label: "My Leaves",    path: "/leave/my",           icon: Calendar,        roles: ["user","employee","admin","hr","manager"] },
+  { label: "Approvals",    path: "/leave/approvals",    icon: CheckSquare,     roles: ["admin","hr","manager"] },
+  { label: "Attendance",   path: "/attendance",         icon: Clock,           roles: ["admin","hr","manager","user","employee"] },
+
+  // ── Finance ──
+  { label: "Payroll",      path: "/payroll",            icon: CreditCard,      roles: ["admin","hr","manager","user","employee"] },
+  { label: "Expenses",     path: "/expenses",           icon: Receipt,         roles: ["admin","hr","manager","user","employee"] },
 
   // ── Asset Management ──
-  { label: "Assets",       path: "/assets",             icon: "💻", roles: ["admin","hr","manager","user","employee"] },
+  { label: "Assets",       path: "/assets",             icon: Laptop,          roles: ["admin","hr","manager","user","employee"] },
+  { label: "Asset Requests",path: "/assets/requests",   icon: Briefcase,       roles: ["admin","hr","manager","user","employee"] },
 
   // ── Notifications ──
-  { label: "Notifications",path: "/notifications",      icon: "🔔", roles: ["admin","hr","manager","user","employee"] },
+  { label: "Notifications",path: "/notifications",      icon: Bell,            roles: ["admin","hr","manager","user","employee"] },
 
   // ── Admin Only ──
-  { label: "Audit Logs",   path: "/audit-logs",         icon: "🔍", roles: ["admin"] },
-  { label: "Reports",      path: "/reports",            icon: "📈", roles: ["admin","hr","manager"] },
+  { label: "User Management", path: "/admin/users",    icon: Shield,          roles: ["admin"] },
+  { label: "Audit Logs",   path: "/audit-logs",         icon: History,         roles: ["admin"] },
+  { label: "Reports",      path: "/reports",            icon: FileSpreadsheet, roles: ["admin","hr","manager"] },
 ];
 
 const navGroups = [
   { title: "Core",              keys: ["Dashboard", "Search"] },
   { title: "Employees",         keys: ["Employees", "Departments", "Skills"] },
-  { title: "Leave",             keys: ["Apply Leave", "My Leaves", "Approvals"] },
-  { title: "Assets",            keys: ["Assets"] },
+  { title: "Leave & Time",      keys: ["Apply Leave", "My Leaves", "Approvals", "Attendance"] },
+  { title: "Finance",           keys: ["Payroll", "Expenses"] },
+  { title: "Assets",            keys: ["Assets", "Asset Requests"] },
   { title: "Notifications",     keys: ["Notifications"] },
-  { title: "Admin",             keys: ["Audit Logs", "Reports"] },
+  { title: "Admin",             keys: ["User Management", "Audit Logs", "Reports"] },
 ];
 
 function Sidebar() {
@@ -53,7 +81,9 @@ function Sidebar() {
   return (
     <aside className="sidebar">
       <div className="sidebar-brand">
-        <span className="sidebar-logo">HR</span>
+        <div className="sidebar-logo">
+          <Building2 size={16} />
+        </div>
         <span className="sidebar-name">PeopleDesk</span>
       </div>
 
@@ -64,18 +94,21 @@ function Sidebar() {
           return (
             <div key={group.title} className="sidebar-group">
               <div className="sidebar-group-label">{group.title}</div>
-              {items.map((item) => (
-                <NavLink
-                  key={item.path}
-                  to={item.path}
-                  className={({ isActive }) =>
-                    `sidebar-link ${isActive ? "active" : ""}`
-                  }
-                >
-                  <span className="sidebar-link-icon">{item.icon}</span>
-                  {item.label}
-                </NavLink>
-              ))}
+              {items.map((item) => {
+                const IconComponent = item.icon;
+                return (
+                  <NavLink
+                    key={item.path}
+                    to={item.path}
+                    className={({ isActive }) =>
+                      `sidebar-link ${isActive ? "active" : ""}`
+                    }
+                  >
+                    <IconComponent size={16} className="sidebar-link-icon" />
+                    <span>{item.label}</span>
+                  </NavLink>
+                );
+              })}
             </div>
           );
         })}
@@ -87,14 +120,15 @@ function Sidebar() {
             <div className="sidebar-avatar">
               {user.name?.charAt(0).toUpperCase()}
             </div>
-            <div>
+            <div className="sidebar-user-info">
               <div className="sidebar-username">{user.name}</div>
               <div className="sidebar-role">{user.role}</div>
             </div>
           </div>
         )}
         <button className="sidebar-logout" onClick={handleLogout}>
-          Sign out
+          <LogOut size={14} />
+          <span>Sign out</span>
         </button>
       </div>
     </aside>

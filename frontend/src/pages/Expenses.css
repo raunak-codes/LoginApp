@@ -1,0 +1,41 @@
+.expenses-container {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.expenses-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 2fr;
+  gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .expenses-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.claim-form-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  height: fit-content;
+}
+
+.claim-form-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.expenses-history-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

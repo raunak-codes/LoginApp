@@ -1,10 +1,26 @@
 const express = require("express");
 const router = express.Router();
 const auth = require("../middleware/auth");
+const authorize = require("../middleware/authorize");
 const assetController = require("../controllers/assetController");
 
-// GET /api/assets/types — distinct asset types (before :id routes)
+// GET /api/assets/types — distinct asset types
 router.get("/types", auth, assetController.getTypes);
+
+// GET /api/assets/requests/my — view own requests
+router.get("/requests/my", auth, assetController.getMyRequests);
+
+// GET /api/assets/requests/pending — view pending requests (Admin/HR only)
+router.get("/requests/pending", auth, authorize("admin", "hr"), assetController.listPendingRequests);
+
+// POST /api/assets/request — submit asset request
+router.post("/request", auth, assetController.submitRequest);
+
+// POST /api/assets/requests/:id/approve — approve asset request (Admin/HR only)
+router.post("/requests/:id/approve", auth, authorize("admin", "hr"), assetController.approveRequest);
+
+// POST /api/assets/requests/:id/reject — reject asset request (Admin/HR only)
+router.post("/requests/:id/reject", auth, authorize("admin", "hr"), assetController.rejectRequest);
 
 // GET /api/assets — list with pagination + filters
 router.get("/", auth, assetController.listAssets);

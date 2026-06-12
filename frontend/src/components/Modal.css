@@ -19,6 +19,11 @@
   animation: slideUp 0.2s ease;
 }
 
+.modal-box.modal-lg {
+  max-width: 680px;
+}
+
+
 .modal-header {
   display: flex;
   align-items: center;

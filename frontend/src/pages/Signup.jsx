@@ -1,12 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Building2 } from "lucide-react";
 import "./Auth.css";
+
 const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
-
 function Signup() {
-  const [form, setForm] = useState({ name: "", email: "", password: "", role: "user" });
+  const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -32,7 +33,10 @@ function Signup() {
     <div className="auth-page">
       <div className="auth-left">
         <div className="auth-left-inner">
-          <div className="auth-brand">PeopleDesk</div>
+          <div className="auth-brand">
+            <Building2 size={32} className="auth-brand-icon" />
+            <span>PeopleDesk</span>
+          </div>
           <p className="auth-tagline">
             Your HR,<br />your way.
           </p>
@@ -76,21 +80,7 @@ function Signup() {
                 required
               />
             </div>
-            <div className="form-group">
-              <label>Role</label>
-              <select
-                name="role"
-                value={form.role}
-                onChange={handleChange}
-                required
-              >
-                <option value="user">User (Standard)</option>
-                <option value="admin">Admin</option>
-                <option value="hr">HR</option>
-                <option value="manager">Manager</option>
-                <option value="employee">Employee</option>
-              </select>
-            </div>
+
             <button className="auth-btn" type="submit" disabled={loading}>
               {loading ? "Creating account..." : "Create account"}
             </button>

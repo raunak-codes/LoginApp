@@ -1,15 +1,18 @@
 .badge {
-  display: inline-block;
-  padding: 3px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 9999px;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   text-transform: capitalize;
+  border: 1px solid transparent;
+  line-height: 1;
 }
 
-.badge-success { background: var(--success-light); color: var(--success); }
-.badge-danger  { background: var(--danger-light);  color: var(--danger);  }
-.badge-warning { background: var(--warning-light); color: var(--warning); }
-.badge-info    { background: var(--info-light);    color: var(--info);    }
-.badge-accent  { background: var(--accent-light);  color: var(--accent-dark); }
+.badge-success { background: #ecfdf5; color: #047857; border-color: #a7f3d0; }
+.badge-danger  { background: #fef2f2; color: #b91c1c; border-color: #fca5a5; }
+.badge-warning { background: #fffbeb; color: #b45309; border-color: #fde68a; }
+.badge-info    { background: #f0f9ff; color: #0369a1; border-color: #bae6fd; }
+.badge-accent  { background: #e0e7ff; color: #4338ca; border-color: #c7d2fe; }

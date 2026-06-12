@@ -9,8 +9,12 @@
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 20px 16px;
-  transition: box-shadow 0.2s, transform 0.2s;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .stat-card:hover {
@@ -18,32 +22,42 @@
   transform: translateY(-2px);
 }
 
-.stat-card-icon {
-  font-size: 22px;
-  margin-bottom: 8px;
+.stat-header {
+  display: flex;
+  align-items: center;
+}
+
+.stat-icon-wrapper {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .stat-card-label {
   font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.05em;
   color: var(--text-muted);
   font-weight: 600;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .stat-card-value {
   font-family: var(--font-display);
-  font-size: 28px;
-  font-weight: 600;
+  font-size: 26px;
+  font-weight: 700;
   color: var(--text);
-  line-height: 1;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
 }
 
 .stat-card-sub {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text-muted);
-  margin-top: 4px;
+  margin-top: 2px;
 }
 
 /* Charts */
@@ -58,7 +72,8 @@
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 20px;
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
 }
 
 .chart-card--wide {
@@ -69,7 +84,28 @@
   font-size: 14px;
   font-weight: 600;
   color: var(--text);
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+}
+
+/* Recharts Custom Tooltip Styling */
+.recharts-default-tooltip {
+  background-color: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-sm) !important;
+  box-shadow: var(--shadow-lg) !important;
+  padding: 8px 12px !important;
+}
+
+.recharts-tooltip-label {
+  font-weight: 600;
+  color: var(--text) !important;
+  font-size: 12px !important;
+  margin-bottom: 4px !important;
+}
+
+.recharts-tooltip-item {
+  font-size: 12px !important;
+  padding: 2px 0 !important;
 }
 
 @media (max-width: 900px) {

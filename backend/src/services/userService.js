@@ -21,6 +21,23 @@ const userService = {
     }
     return roles;
   },
+
+  getAllUsers: async () => {
+    return await userRepository.findAll();
+  },
+
+  updateUserRole: async (id, role) => {
+    const roles = await userService.getRoles();
+    if (!roles.includes(role)) {
+      const { BadRequestError } = require("../utils/errors");
+      throw new BadRequestError("Invalid role");
+    }
+    const user = await userRepository.findById(id);
+    if (!user) {
+      throw new NotFoundError("User not found");
+    }
+    return await userRepository.updateRole(id, role);
+  },
 };
 
 module.exports = userService;

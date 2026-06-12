@@ -2,9 +2,10 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { Building2 } from "lucide-react";
 import "./Auth.css";
-const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
+const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
 function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -30,7 +31,11 @@ function Login() {
         headers: { Authorization: res.data.token },
       });
       login(res.data.token, profile.data);
-      navigate("/dashboard");
+      if (["admin", "hr", "manager"].includes(profile.data.role)) {
+        navigate("/dashboard");
+      } else {
+        navigate("/attendance");
+      }
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
     } finally {
@@ -42,7 +47,10 @@ function Login() {
     <div className="auth-page">
       <div className="auth-left">
         <div className="auth-left-inner">
-          <div className="auth-brand">PeopleDesk</div>
+          <div className="auth-brand">
+            <Building2 size={32} className="auth-brand-icon" />
+            <span>PeopleDesk</span>
+          </div>
           <p className="auth-tagline">
             Managing people, <br />simplified.
           </p>

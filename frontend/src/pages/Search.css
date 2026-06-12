@@ -27,21 +27,21 @@
 
 .search-bar-input {
   width: 100%;
-  padding: 14px 44px;
-  border: 2px solid var(--border);
+  padding: 12px 44px;
+  border: 1px solid var(--border);
   border-radius: 40px;
   font-size: 15px;
   font-family: var(--font-body);
   background: var(--surface);
   color: var(--text);
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: all 0.2s ease;
   box-shadow: var(--shadow-sm);
 }
 
 .search-bar-input:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-light);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
 }
 
 .search-results {

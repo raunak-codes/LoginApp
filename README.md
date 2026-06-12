@@ -6,8 +6,9 @@ A modern, full-stack Employee and Leave Management System built with **React**, 
 
 ## ✨ Features
 
-- **🔒 Advanced Authentication & RBAC**: JWT-based login/signup with custom role assignments (`admin`, `hr`, `manager`, `employee`, `user`).
-- **📊 Interactive Dashboard**: Displays real-time counts of total employees, departments, skills, and uploaded images alongside dynamic hiring trends and department employee count charts.
+- **🔒 Advanced Authentication & RBAC**: JWT-based login and signup with role-based access control (RBAC). Public signups automatically default to the `employee` role to prevent privilege escalation.
+- **🛡️ User Role Management**: Dedicated control panel (`/admin/users`) for administrators to search system users, view roles, and promote/demote users with built-in self-demotion safety checks.
+- **📊 Interactive Dashboard**: Org analytics panel restricted to `admin`, `hr`, and `manager` roles, displaying real-time metrics, department headcounts, salary expenses, hiring trends, and attendance punctuality.
 - **📁 Employee Profile Management**:
   - Add, edit, delete, and view comprehensive employee records.
   - Multi-image upload for employee profiles (up to 5 images using Multer).
@@ -62,7 +63,9 @@ LoginApp/
 │   ├── src/
 │   │   ├── components/         # Premium styling layout elements (Sidebar, Table, etc.)
 │   │   ├── context/            # React global authentication status (AuthContext)
-│   │   ├── pages/              # SPA dashboard and workflow pages
+│   │   ├── pages/              # SPA dashboard, User Management, and workflow pages
+│   │   │   ├── UserManagement.jsx
+│   │   │   └── ...
 │   │   ├── routes/             # App routing registry (AppRoutes.jsx)
 │   │   ├── styles/             # Application global styling variables (global.css)
 │   │   ├── App.jsx             # React master component
@@ -185,9 +188,11 @@ All requests must be made to the backend endpoint `http://localhost:5000`.
 ### Authentication & Profile
 | Method | Endpoint | Description | Protected |
 | :--- | :--- | :--- | :--- |
-| `POST` | `/api/auth/signup` | Register a new user account with selected roles | No |
+| `POST` | `/api/auth/signup` | Register a new user account (defaults to `employee`) | No |
 | `POST` | `/api/auth/login` | Login and return standard JWT bearer token | No |
 | `GET` | `/api/user/profile` | Retrieve profile information for the authenticated user | Yes |
+| `GET` | `/api/user` | Fetch list of all registered users (Admin only) | Yes |
+| `PUT` | `/api/user/:id/role` | Update user access role (Admin only) | Yes |
 
 ### Employee Profiles (v1)
 | Method | Endpoint | Description | Protected |
@@ -259,8 +264,8 @@ All frontend routes are declared inside [AppRoutes.jsx](file:///d:/LoginApp/fron
 | Route Path | Component View | Authorization |
 | :--- | :--- | :--- |
 | `/` | `Login` | Open |
-| `/signup` | `Signup` | Open |
-| `/dashboard` | `Dashboard` | Protected |
+| `/signup` | `Signup` | Open (Role dropdown removed, defaults to `employee`) |
+| `/dashboard` | `Dashboard` | Protected (Restricted to `admin`, `hr`, `manager`) |
 | `/search` | `Search` | Protected |
 | `/employees` | `EmployeeList` | Protected |
 | `/employees/create` | `CreateEmployee` | Protected |
@@ -275,8 +280,9 @@ All frontend routes are declared inside [AppRoutes.jsx](file:///d:/LoginApp/fron
 | `/assets/:id/allocate` | `AssetAllocation` | Protected |
 | `/assets/:id/history` | `AssetHistory` | Protected |
 | `/notifications` | `Notifications` | Protected |
-| `/audit-logs` | `AuditLogs` | Protected |
-| `/reports` | `Reports` | Protected |
+| `/audit-logs` | `AuditLogs` | Protected (Restricted to `admin`) |
+| `/admin/users` | `UserManagement` | Protected (Restricted to `admin`) |
+| `/reports` | `Reports` | Protected (Restricted to `admin`, `hr`, `manager`) |
 
 ---
 
